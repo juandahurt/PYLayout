@@ -5,25 +5,17 @@
 //  Created by Juan Hurtado on 13/05/22.
 //
 
+import PYLayout
 import SwiftUI
 import UIKit
-import PYLayout
 
 struct FeedView: View {
-    func buildBody() -> some View {
-        let factory = PYSwiftUIViewFactory()
-        return factory.buildView(
-            withLayout: .text,
-            params: [
-                "text": "hola a tdodos",
-                "fontSize": 20
-            ]
-        )
-    }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            buildBody()
+        ScrollView {
+            PYTextView("Explora lugares", fontSize: 24)
+                .padding(.bottom, 5)
+            PYTextView("Adentrate en el corazón de la ciudad blanca", fontSize: 12)
         }
     }
 }
