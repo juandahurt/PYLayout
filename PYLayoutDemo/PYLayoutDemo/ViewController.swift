@@ -5,15 +5,25 @@
 //  Created by Juan Hurtado on 13/05/22.
 //
 
+import SwiftUI
 import UIKit
+import PYLayout
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+struct FeedView: View {
+    func buildBody() -> some View {
+        let factory = PYSwiftUIViewFactory()
+        return factory.buildView(
+            withLayout: .text,
+            params: [
+                "text": "hola a tdodos",
+                "fontSize": 20
+            ]
+        )
     }
-
-
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            buildBody()
+        }
+    }
 }
-
