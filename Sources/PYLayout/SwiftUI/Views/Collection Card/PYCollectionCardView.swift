@@ -56,7 +56,16 @@ public struct PYCollectionCardView: View {
         ZStack(alignment: .center) {
             KFImage.url(cards[index].backgroundImage)
                 .resizable()
+                .frame(width: getSize(at: index).width, height: getSize(at: index).height)
                 .aspectRatio(contentMode: .fill)
+            LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
+            VStack(alignment: .leading) {
+                Spacer()
+                HStack {
+                    PYTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
+                    Spacer(minLength: 0)
+                }
+            }.padding()
             Color.white.opacity(getShadowOpacity(forViewAt: index))
         }
         .frame(width: getSize(at: index).width, height: getSize(at: index).height)

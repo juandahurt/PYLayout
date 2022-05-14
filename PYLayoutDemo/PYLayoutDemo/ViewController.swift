@@ -32,7 +32,7 @@ struct FeedView: View {
 struct MockCard: PYCollectionCardData {
     var id: String = ""
     var backgroundImage: URL?
-    var title: String = ""
+    var title: String = "Froilán Largacha Hurtado"
     
     init(_ url: String) {
         self.backgroundImage = URL(string: url)
