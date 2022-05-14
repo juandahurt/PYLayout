@@ -45,7 +45,7 @@ extension PYLayoutManager {
     }
 }
 
-public enum FontRegisteringError: Error {
+enum FontRegisteringError: Error {
     case noFontFound
     case noFontDataProvider
     case noFontFromFontDataProvider
