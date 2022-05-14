@@ -14,8 +14,10 @@ struct FeedView: View {
     var body: some View {
         ScrollView {
             PYTextView("Próceres", fontSize: 24)
-            PYTextView("Personajes ilustres de la ciudad blanca", fontSize: 12)
+                .padding(.bottom, 1)
+            PYTextView("Algunos de los personajes ilustres de la ciudad blanca", fontSize: 12)
                 .padding(.bottom)
+                .opacity(0.7)
             PYCollectionCardView(cards: [
                 MockCard("https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"),
                 MockCard("https://upload.wikimedia.org/wikipedia/commons/a/ac/Froil%C3%A1n_Largacha_Hurtado.jpg"),
