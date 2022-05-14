@@ -5,6 +5,7 @@
 //  Created by Juan Hurtado on 13/05/22.
 //
 
+import Kingfisher
 import SwiftUI
 
 public struct PYCollectionCardView: View {
@@ -12,17 +13,15 @@ public struct PYCollectionCardView: View {
     @State var dragOffset: CGSize = .zero
     @State var dragOpacity: Double = 1
     
-    let firstCardSize = CGSize(width: 250, height: 300)
+    private let firstCardSize = CGSize(width: 250, height: 300)
     
-    // TODO: Remove mock data
-    @State var cards = [
-        Color.blue,
-        Color.red,
-        Color.green,
-        Color.black,
-    ]
+    @State var cards: [PYCollectionCardData]
+    let numberOfCards: Int
     
-    public init() {}
+    public init(cards: [PYCollectionCardData]) {
+        self.cards = cards
+        self.numberOfCards = cards.count
+    }
     
     func next() {
         let card = cards.popLast()!
@@ -30,46 +29,47 @@ public struct PYCollectionCardView: View {
     }
     
     func getSize(at index: Int) -> CGSize {
-        guard index != cards.count - 1 else {
+        guard index != numberOfCards - 1 else {
             return firstCardSize
         }
         return CGSize(
-            width: firstCardSize.width - CGFloat(cards.count - index) * 10,
-            height: firstCardSize.height - CGFloat(cards.count - index) * 10
+            width: firstCardSize.width - CGFloat(numberOfCards - index) * 10,
+            height: firstCardSize.height - CGFloat(numberOfCards - index) * 10
         )
     }
     
     func getShadowOpacity(forViewAt index: Int) -> Double {
-        guard index != cards.count - 1 else {
+        guard index != numberOfCards - 1 else {
             return 0
         }
-        guard index != cards.count - 2 else {
-            if dragOpacity > 1.0 - 1.0 / Double(cards.count - index) {
-                return 1.0 - 1.0 / Double(cards.count - index)
+        guard index != numberOfCards - 2 else {
+            if dragOpacity > 1.0 - 1.0 / Double(numberOfCards - index) {
+                return 1.0 - 1.0 / Double(numberOfCards - index)
             } else {
                 return dragOpacity
             }
         }
-        return 1.0 - 1.0 / Double(cards.count - index)
+        return 1.0 - 1.0 / Double(numberOfCards - index)
     }
     
-    func card(index: Int, color: Color) -> some View {
+    func card(at index: Int) -> some View {
         ZStack(alignment: .center) {
-            color
-            Image(uiImage: image)
+            KFImage.url(cards[index].backgroundImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
             Color.white.opacity(getShadowOpacity(forViewAt: index))
         }
         .frame(width: getSize(at: index).width, height: getSize(at: index).height)
         .cornerRadius(5)
         .opacity(index == cards.count - 1 ? dragOpacity : 1)
-        .offset(x: CGFloat(index == cards.count - 1 ? 0 : (cards.count - index) * 10) , y: 0)
-        .offset(x: index == cards.count - 1 ? dragOffset.width : .zero, y: .zero)
+        .offset(x: CGFloat(index == numberOfCards - 1 ? 0 : (numberOfCards - index) * 10) , y: 0)
+        .offset(x: index == numberOfCards - 1 ? dragOffset.width : .zero, y: .zero)
         .gesture(
             DragGesture(minimumDistance: 0, coordinateSpace: .global)
                 .onChanged({ value in
-                    if value.translation.width < 0 && index == cards.count - 1 {
+                    if value.translation.width < 0 && index == numberOfCards - 1 {
                         dragOffset = value.translation
-                        dragOpacity = (-1/value.translation.width) * 10
+                        dragOpacity = (-1/value.translation.width) * 20
                     } else if value.translation.width >= 0 {
                         dragOpacity = 1
                     }
@@ -87,11 +87,10 @@ public struct PYCollectionCardView: View {
     public var body: some View {
         HStack(alignment: .center) {
             ZStack(alignment: .trailing) {
-                ForEach(cards.indices) { index in
-                    card(index: index, color: cards[index])
+                ForEach(0..<numberOfCards) { index in
+                    card(at: index)
                 }
             }
         }.frame(width: UIScreen.main.bounds.width, height: 300)
-        
     }
 }
