@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol PYStoryData {
+public protocol PYStoryData {
     var image: URL? { get }
     var title: String { get }
+    var subtitle: String { get }
 }
