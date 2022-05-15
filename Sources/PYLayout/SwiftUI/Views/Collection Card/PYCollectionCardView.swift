@@ -13,7 +13,7 @@ public struct PYCollectionCardView: View {
     @State var dragOffset: CGSize = .zero
     @State var dragOpacity: Double = 1
     
-    private let firstCardSize = CGSize(width: 250, height: 300)
+    private let firstCardSize = CGSize(width: 220, height: 300)
     
     @State var cards: [PYCollectionCardData]
     let numberOfCards: Int
