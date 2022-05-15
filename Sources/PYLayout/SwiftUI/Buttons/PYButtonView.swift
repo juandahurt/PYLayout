@@ -10,10 +10,15 @@ import SwiftUI
 
 public struct PYButtonView: View {
     @State var backgroundColor: Color = .blue
+    @State var isBeingPressed = false
     
+    let title: String
+    let fontSize: Int
     let type: PYButtonType
     
-    public init(type: PYButtonType = .loud) {
+    public init(_ title: String, fontSize: Int = 12, type: PYButtonType = .loud) {
+        self.title = title
+        self.fontSize = fontSize
         self.type = type
     }
     
@@ -22,29 +27,47 @@ public struct PYButtonView: View {
         case .loud:
             return .white
         case .quiet:
-            return .blue
+            return .init(.sRGB, red: 89/255, green: 136/255, blue: 219/255, opacity: 1)
+        }
+    }
+    
+    private func getBackgroundColor() -> Color {
+        switch type {
+        case .loud:
+            return .init(.sRGB, red: 100/255, green: 145/255, blue: 223/255, opacity: 1)
+        case .quiet:
+            return .init(.sRGB, red: 232/255, green: 240/255, blue: 255/255, opacity: 1)
+        }
+    }
+    
+    private func getOnPressedBackgroundColor() -> Color {
+        switch type {
+        case .loud:
+            return .init(.sRGB, red: 89/255, green: 136/255, blue: 219/255, opacity: 1)
+        case .quiet:
+            return .init(.sRGB, red: 167/255, green: 195/255, blue: 246/255, opacity: 1)
         }
     }
     
     public var body: some View {
-        PYTextView("Ver todos", fontSize: 12, textColor: getTextColor(), weight: .medium)
+        PYTextView(title, fontSize: fontSize, textColor: getTextColor(), weight: .medium)
             .onTapGesture {
-                print("asdf")
+                // TODO: handle on tap
             }
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged({ _ in
-                        withAnimation(.easeIn(duration: 0.2)) {
-                            backgroundColor = .gray
+                        withAnimation(.easeIn(duration: 0.1)) {
+                            isBeingPressed = true
                         }
                     })
                     .onEnded({ _ in
-                        backgroundColor = .blue
+                        isBeingPressed = false
                     })
             )
             .padding(.horizontal)
             .padding(.vertical, 5)
-            .background(backgroundColor)
+            .background(isBeingPressed ? getOnPressedBackgroundColor() : getBackgroundColor())
             .cornerRadius(4)
     }
 }

@@ -13,7 +13,7 @@ public struct PYTextView: View {
     let textColor: Color
     let weight: PYTextWeight
     
-    public init(_ content: String, fontSize: Int, textColor: Color = .black, weight: PYTextWeight = .regular) {
+    public init(_ content: String, fontSize: Int = 12, textColor: Color = .black, weight: PYTextWeight = .regular) {
         self.content = content
         self.fontSize = fontSize
         self.textColor = textColor

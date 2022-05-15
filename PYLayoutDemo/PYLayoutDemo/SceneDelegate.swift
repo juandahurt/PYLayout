@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController()
         window?.rootViewController = navigationController
-        let vc = UIHostingController(rootView: FeedView())
+        let vc = UIHostingController(rootView: MenuView())
         navigationController.pushViewController(vc, animated: false)
         
         window?.makeKeyAndVisible()
