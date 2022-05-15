@@ -17,6 +17,7 @@
 		2F9321BF282EE49E003DA929 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F9321BD282EE49E003DA929 /* LaunchScreen.storyboard */; };
 		2F9321C7282EE4C1003DA929 /* PYLayout in Resources */ = {isa = PBXBuildFile; fileRef = 2F9321C6282EE4C1003DA929 /* PYLayout */; };
 		2F9321CA282EE4F2003DA929 /* PYLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9321C9282EE4F2003DA929 /* PYLayout */; };
+		2FC004092831AC250037EF10 /* StoryExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC004082831AC250037EF10 /* StoryExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		2F9321BE282EE49E003DA929 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F9321C0282EE49E003DA929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F9321C6282EE4C1003DA929 /* PYLayout */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PYLayout; path = ..; sourceTree = "<group>"; };
+		2FC004082831AC250037EF10 /* StoryExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 				2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */,
 				2F1F7D7228318D9900AA30DB /* TextExample.swift */,
 				2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */,
+				2FC004082831AC250037EF10 /* StoryExample.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC004092831AC250037EF10 /* StoryExample.swift in Sources */,
 				2F1F7D7128317E0700AA30DB /* CollectionCardExample.swift in Sources */,
 				2F1F7D7328318D9900AA30DB /* TextExample.swift in Sources */,
 				2F9321B7282EE49E003DA929 /* MenuView.swift in Sources */,

@@ -25,6 +25,9 @@ struct MenuView: View {
                     NavigationLink("Collection card") {
                         CollectionCardExample()
                     }
+                    NavigationLink("Story") {
+                        StoryExample()
+                    }
                 }
             }
             .navigationTitle("Payan Layout")
