@@ -7,6 +7,8 @@
 
 import Foundation
 
-public enum PYTextWeight {
-    case regular, medium, semibold
+public enum PYTextWeight: String {
+    case regular = "regular"
+    case medium = "medium"
+    case semibold = "semibold"
 }

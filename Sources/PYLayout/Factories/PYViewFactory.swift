@@ -1,0 +1,22 @@
+//
+//  PYViewFactory.swift
+//  
+//
+//  Created by Juan Hurtado on 16/05/22.
+//
+
+import Foundation
+import SwiftUI
+
+public final class PYViewFactory {
+    public static func buildView(ofLayout layout: String, params: [String: Any]?) -> some View {
+        return Group {
+            switch layout {
+            case PYTextView.identifier:
+                PYTextViewFactory.buildView(params: params)
+            default:
+                EmptyView()
+            }
+        }
+    }
+}

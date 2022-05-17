@@ -29,6 +29,11 @@ struct MenuView: View {
                         StoryExample()
                     }
                 }
+                Section(header: Text("Factory")) {
+                    NavigationLink("List of views using factories") {
+                        FactoryExample()
+                    }
+                }
             }
             .navigationTitle("Payan Layout")
         }

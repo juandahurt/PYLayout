@@ -39,3 +39,9 @@ public struct PYTextView: View {
             .foregroundColor(textColor)
     }
 }
+
+extension PYTextView: PYView {
+    static var identifier: String {
+        "txt"
+    }
+}
