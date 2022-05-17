@@ -14,6 +14,8 @@ public final class PYViewFactory {
             switch layout {
             case PYTextView.identifier:
                 PYTextViewFactory.buildView(params: params)
+            case PYButtonView.identifier:
+                PYButtonViewFactory.buildView(params: params)
             default:
                 EmptyView()
             }

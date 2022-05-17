@@ -27,7 +27,23 @@ struct FactoryExample: View {
                     "textColor": "#636363"
                 ]
             )
+            PYViewFactory.buildView(
+                ofLayout: "btn",
+                params: [
+                    "title": "Ver todos",
+                    "fontSize": 14,
+                    "deepLink": "payan://collection?typeId=123",
+                    "handler": self,
+                    "type": "quiet"
+                ]
+            )
             Spacer()
         }
+    }
+}
+
+extension FactoryExample: PYButtonHandler {
+    func onTap(deepLink: String?) {
+        print(deepLink ?? "Tap on button without deep link")
     }
 }

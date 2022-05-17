@@ -7,6 +7,7 @@
 
 import Foundation
 
-public enum PYButtonType {
-    case loud, quiet
+public enum PYButtonType: String {
+    case loud = "loud"
+    case quiet = "quiet"
 }
