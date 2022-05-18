@@ -327,6 +327,7 @@
 				DEVELOPMENT_TEAM = 9TP4HMDZ7W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PYLayoutDemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Payan Layout";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -355,6 +356,7 @@
 				DEVELOPMENT_TEAM = 9TP4HMDZ7W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PYLayoutDemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Payan Layout";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
