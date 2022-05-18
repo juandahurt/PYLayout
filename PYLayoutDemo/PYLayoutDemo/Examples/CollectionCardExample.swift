@@ -23,7 +23,7 @@ struct CollectionCardExample: View {
 }
 
 struct MockCard: PYCollectionCardData {
-    var id: String = ""
+    var deepLink: String = ""
     var backgroundImage: URL?
     var title: String = "Froilán Largacha Hurtado"
     

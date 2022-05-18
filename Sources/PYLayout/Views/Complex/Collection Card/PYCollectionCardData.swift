@@ -9,8 +9,8 @@ import Foundation
 
 /// Defines the data that a collection card can show.
 public protocol PYCollectionCardData {
-    /// Card's identifier
-    var id: String { get }
+    /// Card's deep link
+    var deepLink: String { get }
     /// Card's backgrond image
     var backgroundImage: URL? { get }
     /// Card's title

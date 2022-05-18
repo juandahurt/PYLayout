@@ -53,44 +53,57 @@ public struct PYCollectionCardView: View {
     }
     
     func card(at index: Int) -> some View {
-        ZStack(alignment: .center) {
-            KFImage.url(cards[index].backgroundImage)
-                .resizable()
-                .frame(width: getSize(at: index).width, height: getSize(at: index).height)
-                .aspectRatio(contentMode: .fill)
-            LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
-            VStack(alignment: .leading) {
-                Spacer()
-                HStack {
-                    PYTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
-                    Spacer(minLength: 0)
+        Group {
+            if cards.isEmpty {
+                EmptyView()
+                
+            } else {
+                ZStack(alignment: .center) {
+                    KFImage.url(cards[index].backgroundImage)
+                        .resizable()
+                        .frame(width: getSize(at: index).width, height: getSize(at: index).height)
+                        .aspectRatio(contentMode: .fill)
+                    LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
+                    VStack(alignment: .leading) {
+                        Spacer()
+                        HStack {
+                            PYTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
+                            Spacer(minLength: 0)
+                        }
+                    }.padding()
+                    Color.white.opacity(getShadowOpacity(forViewAt: index))
                 }
-            }.padding()
-            Color.white.opacity(getShadowOpacity(forViewAt: index))
+                .frame(width: getSize(at: index).width, height: getSize(at: index).height)
+                .cornerRadius(5)
+                .opacity(index == cards.count - 1 ? dragOpacity : 1)
+                .offset(x: CGFloat(index == numberOfCards - 1 ? 0 : (numberOfCards - index) * 10) , y: 0)
+                .offset(x: index == numberOfCards - 1 ? dragOffset.width : .zero, y: .zero)
+                .onTapGesture {
+                    if index == numberOfCards - 1 {
+                        // user can only touch the top card!
+                        
+                    }
+                }
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                        .onChanged({ value in
+                            if value.translation.width < 0 && index == numberOfCards - 1 {
+                                dragOffset = value.translation
+                                dragOpacity = (-1/value.translation.width) * 20
+                            } else if value.translation.width >= 0 {
+                                dragOpacity = 1
+                            }
+                        })
+                        .onEnded({ value in
+                            if dragOpacity < 0.4 {
+                                next()
+                            }
+                            dragOpacity = 1
+                            dragOffset = .zero
+                        })
+                )
+            }
         }
-        .frame(width: getSize(at: index).width, height: getSize(at: index).height)
-        .cornerRadius(5)
-        .opacity(index == cards.count - 1 ? dragOpacity : 1)
-        .offset(x: CGFloat(index == numberOfCards - 1 ? 0 : (numberOfCards - index) * 10) , y: 0)
-        .offset(x: index == numberOfCards - 1 ? dragOffset.width : .zero, y: .zero)
-        .gesture(
-            DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                .onChanged({ value in
-                    if value.translation.width < 0 && index == numberOfCards - 1 {
-                        dragOffset = value.translation
-                        dragOpacity = (-1/value.translation.width) * 20
-                    } else if value.translation.width >= 0 {
-                        dragOpacity = 1
-                    }
-                })
-                .onEnded({ value in
-                    if dragOpacity < 0.4 {
-                        next()
-                    }
-                    dragOpacity = 1
-                    dragOffset = .zero
-                })
-        )
     }
     
     public var body: some View {
