@@ -16,6 +16,8 @@ public final class PYViewFactory {
                 PYTextViewFactory.buildView(params: params)
             case PYButtonView.identifier:
                 PYButtonViewFactory.buildView(params: params)
+            case PYCollectionCardView.identifier:
+                PYCollectionCardViewFactory.buildView(params: params)
             default:
                 EmptyView()
             }
