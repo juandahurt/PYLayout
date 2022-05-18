@@ -18,6 +18,9 @@ struct FactoryExample: View {
                     params: [
                         "text": "Próceres",
                         "fontSize": 22,
+                        "margin": [
+                            "bottom": 5.0
+                        ]
                     ]
                 )
                 PYViewFactory.buildView(
@@ -25,12 +28,18 @@ struct FactoryExample: View {
                     params: [
                         "text": "Algunos de los personajes ilustres de Popayán",
                         "fontSize": 14,
-                        "textColor": "#636363"
+                        "textColor": "#636363",
+                        "margin": [
+                            "bottom": 20.0
+                        ]
                     ]
                 )
                 PYViewFactory.buildView(
                     ofLayout: "cc",
                     params: [
+                        "margin": [
+                            "bottom": 20.0
+                        ],
                         "elements": [
                             [
                                 "title": "Francisco José de Caldas",
