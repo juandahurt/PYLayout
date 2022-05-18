@@ -20,7 +20,7 @@ public struct PYStoryView: View {
     var indicators: some View {
         HStack(spacing: 3) {
             ForEach(stories.indices) { index in
-                Color.white.opacity(index == currentIndex ? 0.8 : 0.3)
+                Color.white.opacity(index <= currentIndex ? 0.8 : 0.3)
                     .cornerRadius(1)
             }
         }.frame(height: 5)
