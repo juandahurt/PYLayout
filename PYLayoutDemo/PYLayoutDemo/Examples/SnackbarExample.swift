@@ -21,6 +21,7 @@ struct SnackBarExample: View {
         Spacer()
         PYSnackbarView(
             title: "Hay una actualización disponible",
+            type: .alert,
             isVisible: $showSnackbar,
             buttonTitle: "ACTUALIZAR"
         )

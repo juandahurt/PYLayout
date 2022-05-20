@@ -13,15 +13,26 @@ public struct PYSnackbarView: View {
     @State var opacity: Double = 0
     
     let title: String
+    let type: PYSnackbarType
     @Binding var isVisible: Bool
     let buttonTitle: String?
     let buttonOnTap: (() -> Void)?
     
-    public init(title: String, isVisible: Binding<Bool>, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) {
+    public init(title: String, type: PYSnackbarType = .info, isVisible: Binding<Bool>, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) {
         self.title = title
+        self.type = type
         self._isVisible = isVisible
         self.buttonTitle = buttonTitle
         self.buttonOnTap = buttonOnTap
+    }
+    
+    private func getBackgroundColor() -> Color {
+        switch type {
+        case .info:
+            return .gray
+        case .alert:
+            return .blue
+        }
     }
     
     public var body: some View {
@@ -37,7 +48,7 @@ public struct PYSnackbarView: View {
             .lineLimit(2)
             .padding()
             .frame(width: UIScreen.main.bounds.width - 40)
-            .background(Color.blue)
+            .background(getBackgroundColor())
             .cornerRadius(5)
             .onChange(of: isVisible, perform: { isPresented in
                 withAnimation(.spring()) {
