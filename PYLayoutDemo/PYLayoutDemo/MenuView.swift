@@ -28,6 +28,9 @@ struct MenuView: View {
                     NavigationLink("Story") {
                         StoryExample()
                     }
+                    NavigationLink("Grid") {
+                        GridExample()
+                    }
                 }
             }
             .navigationTitle("Payan Layout")
