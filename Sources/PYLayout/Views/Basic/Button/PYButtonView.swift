@@ -30,6 +30,8 @@ public struct PYButtonView: View {
             return .white
         case .quiet:
             return .init(.sRGB, red: 89/255, green: 136/255, blue: 219/255, opacity: 1)
+        case .custom(_, _, let textColor):
+            return textColor
         }
     }
     
@@ -39,6 +41,8 @@ public struct PYButtonView: View {
             return .init(.sRGB, red: 100/255, green: 145/255, blue: 223/255, opacity: 1)
         case .quiet:
             return .init(.sRGB, red: 232/255, green: 240/255, blue: 255/255, opacity: 1)
+        case .custom(let backgroundColor, _, _):
+            return backgroundColor
         }
     }
     
@@ -48,6 +52,8 @@ public struct PYButtonView: View {
             return .init(.sRGB, red: 89/255, green: 136/255, blue: 219/255, opacity: 1)
         case .quiet:
             return .init(.sRGB, red: 167/255, green: 195/255, blue: 246/255, opacity: 1)
+        case .custom(_, let onPressedColor, _):
+            return onPressedColor
         }
     }
     

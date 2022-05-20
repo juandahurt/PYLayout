@@ -6,8 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
 
-public enum PYButtonType: String {
-    case loud = "loud"
-    case quiet = "quiet"
+public enum PYButtonType {
+    case loud, quiet, custom(Color, Color, Color) // 0: background, 1: on pressed, 2: text color
 }

@@ -14,16 +14,25 @@ public struct PYSnackbarView: View {
     
     let title: String
     @Binding var isVisible: Bool
+    let buttonTitle: String?
+    let buttonOnTap: (() -> Void)?
     
-    public init(title: String, isVisible: Binding<Bool>) {
+    public init(title: String, isVisible: Binding<Bool>, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) {
         self.title = title
         self._isVisible = isVisible
+        self.buttonTitle = buttonTitle
+        self.buttonOnTap = buttonOnTap
     }
     
     public var body: some View {
         HStack {
             PYTextView(title, fontSize: 14, textColor: .white)
             Spacer()
+            if let buttonTitle = buttonTitle {
+                PYButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .clear, .white)) {
+                    buttonOnTap?()
+                }
+            }
         }
             .lineLimit(2)
             .padding()
