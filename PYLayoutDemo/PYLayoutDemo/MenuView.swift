@@ -20,6 +20,9 @@ struct MenuView: View {
                     NavigationLink("Button") {
                         ButtonExample()
                     }
+                    NavigationLink("Snackbar") {
+                        SnackBarExample()
+                    }
                 }
                 Section(header: Text("Complex")) {
                     NavigationLink("Collection card") {
