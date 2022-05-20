@@ -15,15 +15,13 @@ public struct PYButtonView: View {
     let title: String
     let fontSize: Int
     let type: PYButtonType
-    let deepLink: String?
-    let handler: PYButtonHandler?
+    let onTap: (() -> Void)?
     
-    public init(_ title: String, fontSize: Int = 12, type: PYButtonType = .loud, deeplink: String? = nil, handler: PYButtonHandler? = nil) {
+    public init(_ title: String, fontSize: Int = 12, type: PYButtonType = .loud, onTap: (() -> Void)? = nil) {
         self.title = title
         self.fontSize = fontSize
         self.type = type
-        self.deepLink = deeplink
-        self.handler = handler
+        self.onTap = onTap
     }
     
     private func getTextColor() -> Color {
@@ -56,7 +54,7 @@ public struct PYButtonView: View {
     public var body: some View {
         PYTextView(title, fontSize: fontSize, textColor: getTextColor(), weight: .medium)
             .onTapGesture {
-                handler?.onTap(deepLink: deepLink)
+                onTap?()
             }
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0)

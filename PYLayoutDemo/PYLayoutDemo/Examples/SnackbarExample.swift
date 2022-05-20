@@ -13,13 +13,9 @@ struct SnackBarExample: View {
     @State var showSnackbar = false
     
     var body: some View {
-        PYButtonView(!showSnackbar ? "Mostrar snackbar" : "Ocultar snackbar", fontSize: 14)
-            .simultaneousGesture(
-                TapGesture(count: 1)
-                    .onEnded {
-                        showSnackbar = !showSnackbar
-                    }
-            )
+        PYButtonView(!showSnackbar ? "Mostrar snackbar" : "Ocultar snackbar", fontSize: 14) {
+            showSnackbar = !showSnackbar
+        }
         Spacer()
         PYSnackbarView(
             title: "Hay una actualización disponible",
