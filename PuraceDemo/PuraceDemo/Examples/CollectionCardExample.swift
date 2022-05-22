@@ -1,6 +1,6 @@
 //
 //  CollectionCardExample.swift
-//  PYLayoutDemo
+//  PuraceDemo
 //
 //  Created by Juan Hurtado on 15/05/22.
 //
