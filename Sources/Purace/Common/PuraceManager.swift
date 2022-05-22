@@ -1,5 +1,5 @@
 //
-//  PYLayoutManager.swift
+//  PuraceManager.swift
 //  
 //
 //  Created by Juan Hurtado on 14/05/22.
@@ -8,8 +8,8 @@
 import UIKit
 import Foundation
 
-public struct PYLayoutManager {
-    public static let shared = PYLayoutManager()
+public struct PuraceManager {
+    public static let shared = PuraceManager()
     
     private init() {}
     
@@ -18,7 +18,7 @@ public struct PYLayoutManager {
     }
 }
 
-extension PYLayoutManager {
+extension PuraceManager {
     private func registerFonts() {
         let fonts = [
             PYResource(name: "Poppins-Regular", fileExtension: "ttf"),
