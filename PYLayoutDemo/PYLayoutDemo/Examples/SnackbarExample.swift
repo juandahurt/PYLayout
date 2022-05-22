@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import PYLayout
+import Purace
 
 struct SnackBarExample: View {
     @State var showSnackbar = false

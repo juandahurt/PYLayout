@@ -15,11 +15,11 @@
 		2F9321B7282EE49E003DA929 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9321B6282EE49E003DA929 /* MenuView.swift */; };
 		2F9321BC282EE49E003DA929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F9321BB282EE49E003DA929 /* Assets.xcassets */; };
 		2F9321BF282EE49E003DA929 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F9321BD282EE49E003DA929 /* LaunchScreen.storyboard */; };
-		2F9321C7282EE4C1003DA929 /* PYLayout in Resources */ = {isa = PBXBuildFile; fileRef = 2F9321C6282EE4C1003DA929 /* PYLayout */; };
-		2F9321CA282EE4F2003DA929 /* PYLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9321C9282EE4F2003DA929 /* PYLayout */; };
 		2FA986792837351B000DB409 /* GridExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA986782837351B000DB409 /* GridExample.swift */; };
 		2FA9867B28373DD3000DB409 /* SnackbarExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA9867A28373DD3000DB409 /* SnackbarExample.swift */; };
 		2FC004092831AC250037EF10 /* StoryExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC004082831AC250037EF10 /* StoryExample.swift */; };
+		2FEB27C42839C6B20092B7D3 /* Purace in Resources */ = {isa = PBXBuildFile; fileRef = 2FEB27C32839C6B20092B7D3 /* Purace */; };
+		2FEB27C62839C6BB0092B7D3 /* Purace in Frameworks */ = {isa = PBXBuildFile; productRef = 2FEB27C52839C6BB0092B7D3 /* Purace */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +33,10 @@
 		2F9321BB282EE49E003DA929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F9321BE282EE49E003DA929 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F9321C0282EE49E003DA929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F9321C6282EE4C1003DA929 /* PYLayout */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PYLayout; path = ..; sourceTree = "<group>"; };
 		2FA986782837351B000DB409 /* GridExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridExample.swift; sourceTree = "<group>"; };
 		2FA9867A28373DD3000DB409 /* SnackbarExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarExample.swift; sourceTree = "<group>"; };
 		2FC004082831AC250037EF10 /* StoryExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryExample.swift; sourceTree = "<group>"; };
+		2FEB27C32839C6B20092B7D3 /* Purace */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Purace; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F9321CA282EE4F2003DA929 /* PYLayout in Frameworks */,
+				2FEB27C62839C6BB0092B7D3 /* Purace in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +67,7 @@
 		2F9321A6282EE49E003DA929 = {
 			isa = PBXGroup;
 			children = (
-				2F9321C6282EE4C1003DA929 /* PYLayout */,
+				2FEB27C32839C6B20092B7D3 /* Purace */,
 				2F9321B1282EE49E003DA929 /* PYLayoutDemo */,
 				2F9321B0282EE49E003DA929 /* Products */,
 				2F9321C8282EE4F2003DA929 /* Frameworks */,
@@ -120,7 +120,7 @@
 			);
 			name = PYLayoutDemo;
 			packageProductDependencies = (
-				2F9321C9282EE4F2003DA929 /* PYLayout */,
+				2FEB27C52839C6BB0092B7D3 /* Purace */,
 			);
 			productName = PYLayoutDemo;
 			productReference = 2F9321AF282EE49E003DA929 /* PYLayoutDemo.app */;
@@ -168,7 +168,7 @@
 			files = (
 				2F9321BF282EE49E003DA929 /* LaunchScreen.storyboard in Resources */,
 				2F9321BC282EE49E003DA929 /* Assets.xcassets in Resources */,
-				2F9321C7282EE4C1003DA929 /* PYLayout in Resources */,
+				2FEB27C42839C6B20092B7D3 /* Purace in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,9 +403,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2F9321C9282EE4F2003DA929 /* PYLayout */ = {
+		2FEB27C52839C6BB0092B7D3 /* Purace */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PYLayout;
+			productName = Purace;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

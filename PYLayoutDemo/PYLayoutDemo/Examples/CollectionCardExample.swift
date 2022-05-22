@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import PYLayout
+import Purace
 import SwiftUI
 
 struct CollectionCardExample: View {
