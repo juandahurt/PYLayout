@@ -29,7 +29,7 @@ public struct PYButtonView: View {
         case .loud:
             return .white
         case .quiet:
-            return .init(.sRGB, red: 89/255, green: 136/255, blue: 219/255, opacity: 1)
+            return PuraceStyle.Color.B1
         case .custom(_, _, let textColor):
             return textColor
         }
@@ -38,9 +38,9 @@ public struct PYButtonView: View {
     private func getBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return .init(.sRGB, red: 100/255, green: 145/255, blue: 223/255, opacity: 1)
+            return PuraceStyle.Color.B2
         case .quiet:
-            return .init(.sRGB, red: 232/255, green: 240/255, blue: 255/255, opacity: 1)
+            return PuraceStyle.Color.B5
         case .custom(let backgroundColor, _, _):
             return backgroundColor
         }
@@ -49,9 +49,9 @@ public struct PYButtonView: View {
     private func getOnPressedBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return .init(.sRGB, red: 89/255, green: 136/255, blue: 219/255, opacity: 1)
+            return PuraceStyle.Color.B1
         case .quiet:
-            return .init(.sRGB, red: 167/255, green: 195/255, blue: 246/255, opacity: 1)
+            return PuraceStyle.Color.B4
         case .custom(_, let onPressedColor, _):
             return onPressedColor
         }
@@ -77,11 +77,5 @@ public struct PYButtonView: View {
             .padding(.vertical, 5)
             .background(isBeingPressed ? getOnPressedBackgroundColor() : getBackgroundColor())
             .cornerRadius(4)
-    }
-}
-
-extension PYButtonView: PYView {
-    static var identifier: String {
-        "btn"
     }
 }

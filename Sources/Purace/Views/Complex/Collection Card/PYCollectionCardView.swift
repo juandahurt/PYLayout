@@ -116,9 +116,3 @@ public struct PYCollectionCardView: View {
         }.frame(width: UIScreen.main.bounds.width, height: 300)
     }
 }
-
-extension PYCollectionCardView: PYView {
-    static var identifier: String {
-        "cc"
-    }
-}

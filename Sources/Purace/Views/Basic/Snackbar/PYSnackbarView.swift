@@ -29,9 +29,9 @@ public struct PYSnackbarView: View {
     private func getBackgroundColor() -> Color {
         switch type {
         case .info:
-            return .gray
+            return PuraceStyle.Color.G1
         case .alert:
-            return .blue
+            return PuraceStyle.Color.B1
         }
     }
     
