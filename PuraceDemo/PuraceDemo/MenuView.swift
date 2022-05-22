@@ -36,7 +36,7 @@ struct MenuView: View {
                     }
                 }
             }
-            .navigationTitle("Payan Layout")
+            .navigationTitle("Purace")
         }
     }
 }
