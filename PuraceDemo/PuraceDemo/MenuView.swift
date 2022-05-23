@@ -23,6 +23,9 @@ struct MenuView: View {
                     NavigationLink("Snackbar") {
                         SnackBarExample()
                     }
+                    NavigationLink("Loader") {
+                        LoaderExample()
+                    }
                 }
                 Section(header: Text("Complex")) {
                     NavigationLink("Collection card") {

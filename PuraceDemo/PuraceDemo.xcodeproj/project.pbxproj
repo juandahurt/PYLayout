@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F072907283C00080098C5AF /* LoaderExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F072906283C00080098C5AF /* LoaderExample.swift */; };
 		2F1F7D7128317E0700AA30DB /* CollectionCardExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */; };
 		2F1F7D7328318D9900AA30DB /* TextExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7228318D9900AA30DB /* TextExample.swift */; };
 		2F1F7D7528318EEE00AA30DB /* ButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F072906283C00080098C5AF /* LoaderExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderExample.swift; sourceTree = "<group>"; };
 		2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCardExample.swift; sourceTree = "<group>"; };
 		2F1F7D7228318D9900AA30DB /* TextExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExample.swift; sourceTree = "<group>"; };
 		2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExample.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				2FC004082831AC250037EF10 /* StoryExample.swift */,
 				2FA986782837351B000DB409 /* GridExample.swift */,
 				2FA9867A28373DD3000DB409 /* SnackbarExample.swift */,
+				2F072906283C00080098C5AF /* LoaderExample.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				2F1F7D7528318EEE00AA30DB /* ButtonExample.swift in Sources */,
 				2FA986792837351B000DB409 /* GridExample.swift in Sources */,
 				2F9321B5282EE49E003DA929 /* SceneDelegate.swift in Sources */,
+				2F072907283C00080098C5AF /* LoaderExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
