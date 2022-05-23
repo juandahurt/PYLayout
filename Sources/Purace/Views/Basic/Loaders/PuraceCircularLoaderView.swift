@@ -1,5 +1,5 @@
 //
-//  PuraceLoader.swift
+//  PuraceCircularLoaderView.swift
 //  
 //
 //  Created by Juan Hurtado on 23/05/22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct PuraceLoader: View {
+public struct PuraceCircularLoaderView: View {
     let lineWidth: CGFloat
     @State var rotation: Double = 0
     
@@ -20,7 +20,8 @@ public struct PuraceLoader: View {
         let animation = Animation.default
             .repeatForever(autoreverses: false)
             .speed(.random(in: 0.4...0.5))
-        return GeometryReader { reader in
+        
+        GeometryReader { reader in
             Group { () -> Path in
                 var path = Path()
                 path.addArc(
