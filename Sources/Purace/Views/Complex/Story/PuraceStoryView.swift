@@ -1,5 +1,5 @@
 //
-//  PYStoryView.swift
+//  PuraceStoryView.swift
 //  
 //
 //  Created by Juan Hurtado on 15/05/22.
@@ -8,12 +8,12 @@
 import SwiftUI
 import Kingfisher
 
-public struct PYStoryView: View {
+public struct PuraceStoryView: View {
     @State var currentIndex: Int = 0
     
-    let stories: [PYStoryData]
+    let stories: [PuraceStoryData]
     
-    public init(stories: [PYStoryData]) {
+    public init(stories: [PuraceStoryData]) {
         self.stories = stories
     }
     
@@ -47,11 +47,11 @@ public struct PYStoryView: View {
             VStack {
                 Spacer()
                 HStack {
-                    PYTextView(stories[currentIndex].title, fontSize: 16, textColor: .white, weight: .medium)
+                    PuraceTextView(stories[currentIndex].title, fontSize: 16, textColor: .white, weight: .medium)
                     Spacer()
                 }
                 HStack {
-                    PYTextView(stories[currentIndex].subtitle, fontSize: 12, textColor: .white)
+                    PuraceTextView(stories[currentIndex].subtitle, fontSize: 12, textColor: .white)
                     Spacer()
                 }
             }.padding()

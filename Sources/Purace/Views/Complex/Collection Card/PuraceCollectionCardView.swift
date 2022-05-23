@@ -1,5 +1,5 @@
 //
-//  PYCollectionCardView.swift
+//  PuraceCollectionCardView.swift
 //  
 //
 //  Created by Juan Hurtado on 13/05/22.
@@ -8,17 +8,17 @@
 import Kingfisher
 import SwiftUI
 
-public struct PYCollectionCardView: View {
+public struct PuraceCollectionCardView: View {
     @State var image = UIImage()
     @State var dragOffset: CGSize = .zero
     @State var dragOpacity: Double = 1
     
     private let firstCardSize = CGSize(width: 220, height: 300)
     
-    @State var cards: [PYCollectionCardData]
+    @State var cards: [PuraceCollectionCardData]
     let numberOfCards: Int
     
-    public init(cards: [PYCollectionCardData]) {
+    public init(cards: [PuraceCollectionCardData]) {
         self.cards = cards
         self.numberOfCards = cards.count
     }
@@ -67,7 +67,7 @@ public struct PYCollectionCardView: View {
                     VStack(alignment: .leading) {
                         Spacer()
                         HStack {
-                            PYTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
+                            PuraceTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
                             Spacer(minLength: 0)
                         }
                     }.padding()
@@ -114,11 +114,5 @@ public struct PYCollectionCardView: View {
                 }
             }
         }.frame(width: UIScreen.main.bounds.width, height: 300)
-    }
-}
-
-extension PYCollectionCardView: PYView {
-    static var identifier: String {
-        "cc"
     }
 }

@@ -1,5 +1,5 @@
 //
-//  PYTextView.swift
+//  PuraceTextView.swift
 //  
 //
 //  Created by Juan Hurtado on 13/05/22.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-public struct PYTextView: View {
+public struct PuraceTextView: View {
     let content: String
     let fontSize: Int
     let textColor: Color
-    let weight: PYTextWeight
+    let weight: PuraceTextWeight
     
-    public init(_ content: String, fontSize: Int = 12, textColor: Color = .black, weight: PYTextWeight = .regular) {
+    public init(_ content: String, fontSize: Int = 12, textColor: Color = PuraceStyle.Color.N1, weight: PuraceTextWeight = .regular) {
         self.content = content
         self.fontSize = fontSize
         self.textColor = textColor
@@ -37,11 +37,5 @@ public struct PYTextView: View {
         Text(content)
             .font(getFont())
             .foregroundColor(textColor)
-    }
-}
-
-extension PYTextView: PYView {
-    static var identifier: String {
-        "txt"
     }
 }

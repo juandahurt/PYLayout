@@ -1,5 +1,5 @@
 //
-//  PYResource.swift
+//  PuraceResource.swift
 //  
 //
 //  Created by Juan Hurtado on 14/05/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PYResource {
+struct PuraceResource {
     var name: String
     var fileExtension: String
     var url: URL? {

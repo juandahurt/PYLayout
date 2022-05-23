@@ -11,9 +11,9 @@ import Purace
 
 struct StoryExample: View {
     var body: some View {
-        Text("`PYStoryView(stories: [...])`")
+        Text("`PuraceStoryView(stories: [...])`")
             .padding()
-        PYStoryView(stories: [
+        PuraceStoryView(stories: [
             MockStory(
                 image: URL(string: "https://elturismoencolombia.com/wp-content/uploads/2018/06/popayan_iglesia_santo_domingo_colombia_travel.jpg"),
                 title: "First title",
@@ -34,7 +34,7 @@ struct StoryExample: View {
     }
 }
 
-struct MockStory: PYStoryData {
+struct MockStory: PuraceStoryData {
     var image: URL?
     var title: String
     var subtitle: String
