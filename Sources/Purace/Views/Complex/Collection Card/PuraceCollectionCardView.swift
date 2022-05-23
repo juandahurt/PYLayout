@@ -60,6 +60,16 @@ public struct PuraceCollectionCardView: View {
             } else {
                 ZStack(alignment: .center) {
                     KFImage.url(cards[index].backgroundImage)
+                        .placeholder({ _ in
+                            GeometryReader { reader in
+                                ZStack {
+                                    PuraceCircularLoaderView()
+                                        .foregroundColor(PuraceStyle.Color.G3)
+                                        .frame(width: reader.size.width * 0.1, height: reader.size.width * 0.1)
+                                        .position(x: reader.size.width / 2, y: reader.size.height / 2)
+                                }
+                            }
+                        })
                         .resizable()
                         .frame(width: getSize(at: index).width, height: getSize(at: index).height)
                         .aspectRatio(contentMode: .fill)
