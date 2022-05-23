@@ -56,21 +56,9 @@ public struct PuraceCollectionCardView: View {
         Group {
             if cards.isEmpty {
                 EmptyView()
-                
             } else {
                 ZStack(alignment: .center) {
-                    KFImage.url(cards[index].backgroundImage)
-                        .placeholder({ _ in
-                            GeometryReader { reader in
-                                ZStack {
-                                    PuraceCircularLoaderView()
-                                        .foregroundColor(PuraceStyle.Color.G3)
-                                        .frame(width: reader.size.width * 0.1, height: reader.size.width * 0.1)
-                                        .position(x: reader.size.width / 2, y: reader.size.height / 2)
-                                }
-                            }
-                        })
-                        .resizable()
+                    PuraceImageView(url: cards[index].backgroundImage)
                         .frame(width: getSize(at: index).width, height: getSize(at: index).height)
                         .aspectRatio(contentMode: .fill)
                     LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
