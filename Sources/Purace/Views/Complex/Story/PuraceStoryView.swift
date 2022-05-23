@@ -40,7 +40,14 @@ public struct PuraceStoryView: View {
         ZStack {
             KFImage.url(stories[currentIndex].image)
                 .placeholder({ _ in
-                    ProgressView()
+                    GeometryReader { reader in
+                        ZStack {
+                            PuraceCircularLoaderView()
+                                .foregroundColor(PuraceStyle.Color.G3)
+                                .frame(width: reader.size.width * 0.1, height: reader.size.width * 0.1)
+                                .position(x: reader.size.width / 2, y: reader.size.height / 2)
+                        }
+                    }
                 })
                 .resizable()
             LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
