@@ -13,13 +13,13 @@ struct SnackBarExample: View {
     @State var showSnackbar = false
     
     var body: some View {
-        Text("`PYSnackbarView(title: ...)`")
+        Text("`PuraceSnackbarView(title: ...)`")
             .padding()
-        PYButtonView(!showSnackbar ? "Mostrar snackbar" : "Ocultar snackbar", fontSize: 14) {
+        PuraceButtonView(!showSnackbar ? "Mostrar snackbar" : "Ocultar snackbar", fontSize: 14) {
             showSnackbar = !showSnackbar
         }
         Spacer()
-        PYSnackbarView(
+        PuraceSnackbarView(
             title: "Hay una actualización disponible",
             type: .alert,
             isVisible: $showSnackbar,

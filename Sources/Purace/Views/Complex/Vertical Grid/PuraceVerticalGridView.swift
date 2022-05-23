@@ -1,5 +1,5 @@
 //
-//  PYVerticalGridView.swift
+//  PuraceVerticalGridView.swift
 //  
 //
 //  Created by Juan Hurtado on 19/05/22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct PYVerticalGridView<Content: View>: View {
+public struct PuraceVerticalGridView<Content: View>: View {
     private let gridItems: [GridItem]
     
     let content: Content

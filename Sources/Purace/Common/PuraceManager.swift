@@ -21,9 +21,9 @@ public struct PuraceManager {
 extension PuraceManager {
     private func registerFonts() {
         let fonts = [
-            PYResource(name: "Poppins-Regular", fileExtension: "ttf"),
-            PYResource(name: "Poppins-Medium", fileExtension: "ttf"),
-            PYResource(name: "Poppins-SemiBold", fileExtension: "ttf")
+            PuraceResource(name: "Poppins-Regular", fileExtension: "ttf"),
+            PuraceResource(name: "Poppins-Medium", fileExtension: "ttf"),
+            PuraceResource(name: "Poppins-SemiBold", fileExtension: "ttf")
         ]
         fonts.forEach({ try? registerFont(from: $0.url)})
     }

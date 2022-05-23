@@ -11,9 +11,9 @@ import SwiftUI
 
 struct CollectionCardExample: View {
     var body: some View {
-        Text("`PYCollectionCardView(cards: ...)`")
+        Text("`PuraceCollectionCardView(cards: ...)`")
             .padding()
-        PYCollectionCardView(cards: [
+        PuraceCollectionCardView(cards: [
             MockCard("https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"),
             MockCard("https://upload.wikimedia.org/wikipedia/commons/a/ac/Froil%C3%A1n_Largacha_Hurtado.jpg"),
             MockCard("https://upload.wikimedia.org/wikipedia/commons/8/86/Camilo_Torres_y_Tenorio.jpg")
@@ -22,7 +22,7 @@ struct CollectionCardExample: View {
     }
 }
 
-struct MockCard: PYCollectionCardData {
+struct MockCard: PuraceCollectionCardData {
     var deepLink: String = ""
     var backgroundImage: URL?
     var title: String = "Froilán Largacha Hurtado"

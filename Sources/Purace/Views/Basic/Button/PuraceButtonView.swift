@@ -1,5 +1,5 @@
 //
-//  PYButtonView.swift
+//  PuraceButtonView.swift
 //  
 //
 //  Created by Juan Hurtado on 14/05/22.
@@ -8,16 +8,16 @@
 import Foundation
 import SwiftUI
 
-public struct PYButtonView: View {
+public struct PuraceButtonView: View {
     @State var backgroundColor: Color = .blue
     @State var isBeingPressed = false
     
     let title: String
     let fontSize: Int
-    let type: PYButtonType
+    let type: PuraceButtonType
     let onTap: (() -> Void)?
     
-    public init(_ title: String, fontSize: Int = 12, type: PYButtonType = .loud, onTap: (() -> Void)? = nil) {
+    public init(_ title: String, fontSize: Int = 12, type: PuraceButtonType = .loud, onTap: (() -> Void)? = nil) {
         self.title = title
         self.fontSize = fontSize
         self.type = type
@@ -58,7 +58,7 @@ public struct PYButtonView: View {
     }
     
     public var body: some View {
-        PYTextView(title, fontSize: fontSize, textColor: getTextColor(), weight: .medium)
+        PuraceTextView(title, fontSize: fontSize, textColor: getTextColor(), weight: .medium)
             .onTapGesture {
                 onTap?()
             }

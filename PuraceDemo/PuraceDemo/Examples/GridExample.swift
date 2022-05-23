@@ -12,9 +12,9 @@ import Purace
 
 struct GridExample: View {
     var body: some View {
-        Text("`PYVerticalGridView(...)`")
+        Text("`PuraceVerticalGridView(...)`")
             .padding()
-        PYVerticalGridView(columns: 2, spacing: 1) {
+        PuraceVerticalGridView(columns: 2, spacing: 1) {
             KFImage(URL(string: "https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"))
                 .resizable()
                 .frame(height: 200)

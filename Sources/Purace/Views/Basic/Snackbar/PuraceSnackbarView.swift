@@ -1,5 +1,5 @@
 //
-//  PYSnackbarView.swift
+//  PuraceSnackbarView.swift
 //  
 //
 //  Created by Juan Hurtado on 19/05/22.
@@ -8,17 +8,17 @@
 import Foundation
 import SwiftUI
 
-public struct PYSnackbarView: View {
+public struct PuraceSnackbarView: View {
     @State var yOffset: CGFloat = 100
     @State var opacity: Double = 0
     
     let title: String
-    let type: PYSnackbarType
+    let type: PuraceSnackbarType
     @Binding var isVisible: Bool
     let buttonTitle: String?
     let buttonOnTap: (() -> Void)?
     
-    public init(title: String, type: PYSnackbarType = .info, isVisible: Binding<Bool>, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) {
+    public init(title: String, type: PuraceSnackbarType = .info, isVisible: Binding<Bool>, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) {
         self.title = title
         self.type = type
         self._isVisible = isVisible
@@ -37,10 +37,10 @@ public struct PYSnackbarView: View {
     
     public var body: some View {
         HStack {
-            PYTextView(title, fontSize: 14, textColor: .white)
+            PuraceTextView(title, fontSize: 14, textColor: .white)
             Spacer()
             if let buttonTitle = buttonTitle {
-                PYButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .clear, .white)) {
+                PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .clear, .white)) {
                     buttonOnTap?()
                 }
             }
