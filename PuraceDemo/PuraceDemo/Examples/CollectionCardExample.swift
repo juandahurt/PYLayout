@@ -11,14 +11,16 @@ import SwiftUI
 
 struct CollectionCardExample: View {
     var body: some View {
-        Text("`PuraceCollectionCardView(cards: ...)`")
-            .padding()
-        PuraceCollectionCardView(cards: [
-            MockCard("https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"),
-            MockCard("https://upload.wikimedia.org/wikipedia/commons/a/ac/Froil%C3%A1n_Largacha_Hurtado.jpg"),
-            MockCard("https://upload.wikimedia.org/wikipedia/commons/8/86/Camilo_Torres_y_Tenorio.jpg")
-        ])
-        Spacer()
+        ScrollView {
+            Text("`PuraceCollectionCardView(cards: ...)`")
+                .padding()
+            PuraceCollectionCardView(cards: [
+                MockCard("https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"),
+                MockCard("https://upload.wikimedia.org/wikipedia/commons/a/ac/Froil%C3%A1n_Largacha_Hurtado.jpg"),
+                MockCard("https://upload.wikimedia.org/wikipedia/commons/8/86/Camilo_Torres_y_Tenorio.jpg")
+            ])
+            Spacer()
+        }
     }
 }
 

@@ -83,7 +83,7 @@ public struct PuraceCollectionCardView: View {
                     }
                 }
                 .simultaneousGesture(
-                    DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                    DragGesture(minimumDistance: 10, coordinateSpace: .global)
                         .onChanged({ value in
                             if value.translation.width < 0 && index == numberOfCards - 1 {
                                 dragOffset = value.translation
