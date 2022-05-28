@@ -13,14 +13,17 @@ public struct PuraceCollectionCardView: View {
     @State var dragOffset: CGSize = .zero
     @State var dragOpacity: Double = 1
     
-    private let firstCardSize = CGSize(width: 220, height: 300)
+    private let firstCardSize: CGSize
+    private let onCardTapped: ((PuraceCollectionCardData) -> Void)?
     
     @State var cards: [PuraceCollectionCardData]
     let numberOfCards: Int
     
-    public init(cards: [PuraceCollectionCardData]) {
+    public init(firstCardSize: CGSize, cards: [PuraceCollectionCardData], onCardTapped: ((PuraceCollectionCardData) -> Void)? = nil) {
+        self.firstCardSize = firstCardSize
         self.cards = cards
         self.numberOfCards = cards.count
+        self.onCardTapped = onCardTapped
     }
     
     func next() {
@@ -32,9 +35,20 @@ public struct PuraceCollectionCardView: View {
         guard index != numberOfCards - 1 else {
             return firstCardSize
         }
+        let maxWidth: CGFloat
+        let maxHeight: CGFloat
+        if index == numberOfCards - 2 {
+            maxWidth = firstCardSize.width
+            maxHeight = firstCardSize.height
+        } else {
+            maxWidth = firstCardSize.width - CGFloat(numberOfCards - index - 1) * 10
+            maxHeight = firstCardSize.height - CGFloat(numberOfCards - index - 1) * 10
+        }
+        let possibleWidth = firstCardSize.width - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.7
+        let possibleHeight = firstCardSize.height - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.7
         return CGSize(
-            width: firstCardSize.width - CGFloat(numberOfCards - index) * 10,
-            height: firstCardSize.height - CGFloat(numberOfCards - index) * 10
+            width: min(possibleWidth, maxWidth),
+            height: min(possibleHeight, maxHeight)
         )
     }
     
@@ -50,6 +64,19 @@ public struct PuraceCollectionCardView: View {
             }
         }
         return 1.0 - 1.0 / Double(numberOfCards - index)
+    }
+    
+    func getHorizontalOffset(forCardAt index: Int) -> CGFloat {
+        guard index != numberOfCards - 1 else {
+            return 0
+        }
+        let minOffset: CGFloat
+        if index == numberOfCards - 2 {
+            minOffset = 0
+        } else {
+            minOffset = CGFloat((numberOfCards - index - 1) * 15)
+        }
+        return max(CGFloat((numberOfCards - index) * 15) + dragOffset.width * 0.5, minOffset)
     }
     
     func card(at index: Int) -> some View {
@@ -74,16 +101,16 @@ public struct PuraceCollectionCardView: View {
                 .frame(width: getSize(at: index).width, height: getSize(at: index).height)
                 .cornerRadius(5)
                 .opacity(index == cards.count - 1 ? dragOpacity : 1)
-                .offset(x: CGFloat(index == numberOfCards - 1 ? 0 : (numberOfCards - index) * 10) , y: 0)
+                .offset(x: getHorizontalOffset(forCardAt: index), y: 0)
                 .offset(x: index == numberOfCards - 1 ? dragOffset.width : .zero, y: .zero)
                 .onTapGesture {
                     if index == numberOfCards - 1 {
                         // user can only touch the top card!
-                        
+                        onCardTapped?(cards[index])
                     }
                 }
                 .simultaneousGesture(
-                    DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                    DragGesture(minimumDistance: 10, coordinateSpace: .global)
                         .onChanged({ value in
                             if value.translation.width < 0 && index == numberOfCards - 1 {
                                 dragOffset = value.translation
@@ -105,12 +132,14 @@ public struct PuraceCollectionCardView: View {
     }
     
     public var body: some View {
-        HStack(alignment: .center) {
-            ZStack(alignment: .trailing) {
-                ForEach(0..<numberOfCards) { index in
-                    card(at: index)
+        GeometryReader { reader in
+            HStack(alignment: .center) {
+                ZStack(alignment: .trailing) {
+                    ForEach(0..<numberOfCards) { index in
+                        card(at: index)
+                    }
                 }
-            }
-        }.frame(width: UIScreen.main.bounds.width, height: 300)
+            }.frame(width: UIScreen.main.bounds.width, height: firstCardSize.height)
+        }
     }
 }
