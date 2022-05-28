@@ -14,14 +14,16 @@ public struct PuraceCollectionCardView: View {
     @State var dragOpacity: Double = 1
     
     private let firstCardSize: CGSize
+    private let onCardTapped: ((PuraceCollectionCardData) -> Void)?
     
     @State var cards: [PuraceCollectionCardData]
     let numberOfCards: Int
     
-    public init(firstCardSize: CGSize, cards: [PuraceCollectionCardData]) {
+    public init(firstCardSize: CGSize, cards: [PuraceCollectionCardData], onCardTapped: ((PuraceCollectionCardData) -> Void)? = nil) {
         self.firstCardSize = firstCardSize
         self.cards = cards
         self.numberOfCards = cards.count
+        self.onCardTapped = onCardTapped
     }
     
     func next() {
@@ -80,7 +82,7 @@ public struct PuraceCollectionCardView: View {
                 .onTapGesture {
                     if index == numberOfCards - 1 {
                         // user can only touch the top card!
-                        
+                        onCardTapped?(cards[index])
                     }
                 }
                 .simultaneousGesture(

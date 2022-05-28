@@ -21,7 +21,9 @@ struct CollectionCardExample: View {
                     MockCard("https://upload.wikimedia.org/wikipedia/commons/a/ac/Froil%C3%A1n_Largacha_Hurtado.jpg"),
                     MockCard("https://upload.wikimedia.org/wikipedia/commons/8/86/Camilo_Torres_y_Tenorio.jpg")
                 ]
-            )
+            ) { card in
+                print("selected card: \(card)")
+            }
             Spacer()
         }
     }
