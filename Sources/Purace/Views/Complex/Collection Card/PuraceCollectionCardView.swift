@@ -35,9 +35,20 @@ public struct PuraceCollectionCardView: View {
         guard index != numberOfCards - 1 else {
             return firstCardSize
         }
+        let maxWidth: CGFloat
+        let maxHeight: CGFloat
+        if index == numberOfCards - 2 {
+            maxWidth = firstCardSize.width
+            maxHeight = firstCardSize.height
+        } else {
+            maxWidth = firstCardSize.width - CGFloat(numberOfCards - index - 1) * 10
+            maxHeight = firstCardSize.height - CGFloat(numberOfCards - index - 1) * 10
+        }
+        let possibleWidth = firstCardSize.width - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.7
+        let possibleHeight = firstCardSize.height - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.7
         return CGSize(
-            width: firstCardSize.width - CGFloat(numberOfCards - index) * 10,
-            height: firstCardSize.height - CGFloat(numberOfCards - index) * 10
+            width: min(possibleWidth, maxWidth),
+            height: min(possibleHeight, maxHeight)
         )
     }
     
@@ -53,6 +64,19 @@ public struct PuraceCollectionCardView: View {
             }
         }
         return 1.0 - 1.0 / Double(numberOfCards - index)
+    }
+    
+    func getHorizontalOffset(forCardAt index: Int) -> CGFloat {
+        guard index != numberOfCards - 1 else {
+            return 0
+        }
+        let minOffset: CGFloat
+        if index == numberOfCards - 2 {
+            minOffset = 0
+        } else {
+            minOffset = CGFloat((numberOfCards - index - 1) * 15)
+        }
+        return max(CGFloat((numberOfCards - index) * 15) + dragOffset.width * 0.5, minOffset)
     }
     
     func card(at index: Int) -> some View {
@@ -77,7 +101,7 @@ public struct PuraceCollectionCardView: View {
                 .frame(width: getSize(at: index).width, height: getSize(at: index).height)
                 .cornerRadius(5)
                 .opacity(index == cards.count - 1 ? dragOpacity : 1)
-                .offset(x: CGFloat(index == numberOfCards - 1 ? 0 : (numberOfCards - index) * 10) , y: 0)
+                .offset(x: getHorizontalOffset(forCardAt: index), y: 0)
                 .offset(x: index == numberOfCards - 1 ? dragOffset.width : .zero, y: .zero)
                 .onTapGesture {
                     if index == numberOfCards - 1 {
