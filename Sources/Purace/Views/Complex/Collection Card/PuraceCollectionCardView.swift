@@ -13,12 +13,13 @@ public struct PuraceCollectionCardView: View {
     @State var dragOffset: CGSize = .zero
     @State var dragOpacity: Double = 1
     
-    private let firstCardSize = CGSize(width: 220, height: 300)
+    private let firstCardSize: CGSize
     
     @State var cards: [PuraceCollectionCardData]
     let numberOfCards: Int
     
-    public init(cards: [PuraceCollectionCardData]) {
+    public init(firstCardSize: CGSize, cards: [PuraceCollectionCardData]) {
+        self.firstCardSize = firstCardSize
         self.cards = cards
         self.numberOfCards = cards.count
     }
@@ -105,12 +106,14 @@ public struct PuraceCollectionCardView: View {
     }
     
     public var body: some View {
-        HStack(alignment: .center) {
-            ZStack(alignment: .trailing) {
-                ForEach(0..<numberOfCards) { index in
-                    card(at: index)
+        GeometryReader { reader in
+            HStack(alignment: .center) {
+                ZStack(alignment: .trailing) {
+                    ForEach(0..<numberOfCards) { index in
+                        card(at: index)
+                    }
                 }
-            }
-        }.frame(width: UIScreen.main.bounds.width, height: 300)
+            }.frame(width: UIScreen.main.bounds.width, height: firstCardSize.height)
+        }
     }
 }
