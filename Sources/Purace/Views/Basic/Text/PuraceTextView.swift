@@ -21,16 +21,7 @@ public struct PuraceTextView: View {
     }
     
     private func getFont() -> Font {
-        var fontName = "Poppins-"
-        switch weight {
-        case .regular:
-            fontName += "Regular"
-        case .medium:
-            fontName += "Medium"
-        case .semibold:
-            fontName += "SemiBold"
-        }
-        return .custom(fontName, size: CGFloat(fontSize))
+        PuraceStyle.Font.get(size: CGFloat(fontSize), weight: weight)
     }
     
     public var body: some View {
