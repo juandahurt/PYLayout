@@ -32,4 +32,19 @@ public struct PuraceStyle {
         public static let G7 = SwiftUI.Color(hex: "D7DCE1") ?? .gray
         public static let G8 = SwiftUI.Color(hex: "DFE4E8") ?? .gray
     }
+    
+    public struct Font {
+        public static func get(size: CGFloat, weight: PuraceTextWeight = .regular) -> SwiftUI.Font {
+            var fontName = "Poppins-"
+            switch weight {
+            case .regular:
+                fontName += "Regular"
+            case .medium:
+                fontName += "Medium"
+            case .semibold:
+                fontName += "SemiBold"
+            }
+            return .custom(fontName, size: size)
+        }
+    }
 }
