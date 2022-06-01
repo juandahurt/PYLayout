@@ -11,6 +11,7 @@
 		2F1F7D7128317E0700AA30DB /* CollectionCardExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */; };
 		2F1F7D7328318D9900AA30DB /* TextExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7228318D9900AA30DB /* TextExample.swift */; };
 		2F1F7D7528318EEE00AA30DB /* ButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */; };
+		2F27BC9D284814B600B5AC8D /* TabExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F27BC9C284814B600B5AC8D /* TabExample.swift */; };
 		2F77A234283C4AC700F143FB /* ImageExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F77A233283C4AC700F143FB /* ImageExample.swift */; };
 		2F9321B3282EE49E003DA929 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9321B2282EE49E003DA929 /* AppDelegate.swift */; };
 		2F9321B5282EE49E003DA929 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9321B4282EE49E003DA929 /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 		2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCardExample.swift; sourceTree = "<group>"; };
 		2F1F7D7228318D9900AA30DB /* TextExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExample.swift; sourceTree = "<group>"; };
 		2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExample.swift; sourceTree = "<group>"; };
+		2F27BC9C284814B600B5AC8D /* TabExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabExample.swift; sourceTree = "<group>"; };
 		2F77A233283C4AC700F143FB /* ImageExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExample.swift; sourceTree = "<group>"; };
 		2F9321AF282EE49E003DA929 /* PuraceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuraceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9321B2282EE49E003DA929 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,16 +60,33 @@
 		2F1F7D6F28317DE200AA30DB /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */,
+				2F27BC9B284814A700B5AC8D /* Complex */,
+				2F27BC9A2848149900B5AC8D /* Basic */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		2F27BC9A2848149900B5AC8D /* Basic */ = {
+			isa = PBXGroup;
+			children = (
 				2F1F7D7228318D9900AA30DB /* TextExample.swift */,
 				2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */,
-				2FC004082831AC250037EF10 /* StoryExample.swift */,
-				2FA986782837351B000DB409 /* GridExample.swift */,
-				2FA9867A28373DD3000DB409 /* SnackbarExample.swift */,
 				2F072906283C00080098C5AF /* LoaderExample.swift */,
 				2F77A233283C4AC700F143FB /* ImageExample.swift */,
 			);
-			path = Examples;
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		2F27BC9B284814A700B5AC8D /* Complex */ = {
+			isa = PBXGroup;
+			children = (
+				2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */,
+				2FC004082831AC250037EF10 /* StoryExample.swift */,
+				2FA986782837351B000DB409 /* GridExample.swift */,
+				2FA9867A28373DD3000DB409 /* SnackbarExample.swift */,
+				2F27BC9C284814B600B5AC8D /* TabExample.swift */,
+			);
+			path = Complex;
 			sourceTree = "<group>";
 		};
 		2F9321A6282EE49E003DA929 = {
@@ -195,6 +214,7 @@
 				2F1F7D7528318EEE00AA30DB /* ButtonExample.swift in Sources */,
 				2FA986792837351B000DB409 /* GridExample.swift in Sources */,
 				2F9321B5282EE49E003DA929 /* SceneDelegate.swift in Sources */,
+				2F27BC9D284814B600B5AC8D /* TabExample.swift in Sources */,
 				2F072907283C00080098C5AF /* LoaderExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
