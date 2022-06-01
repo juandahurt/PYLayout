@@ -11,7 +11,18 @@ import Purace
 
 struct TabExample: View {
     var body: some View {
-        PuraceTabView()
+        PuraceTabView { index in
+            Group {
+                switch index {
+                case 0:
+                    PuraceTextView("First view")
+                case 1:
+                    PuraceTextView("Second view")
+                default:
+                    PuraceTextView("Third view")
+                }
+            }.frame(height: 100)
+        }
         Spacer()
     }
 }

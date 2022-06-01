@@ -8,12 +8,15 @@
 import Foundation
 import SwiftUI
 
-public struct PuraceTabView: View {
+public struct PuraceTabView<T: View>: View {
     let titles: [String] = ["Acerca de", "Imágenes", "Ubicación"]
     @State var selectedIndex = 0
     @State var indicatorOffset: CGFloat = .zero
+    var viewForIndex: (Int) -> T
     
-    public init() {}
+    public init(viewForIndex: @escaping (Int) -> T) {
+        self.viewForIndex = viewForIndex
+    }
     
     func headers(in size: CGSize) -> some View {
         HStack(spacing: 0) {
@@ -52,6 +55,7 @@ public struct PuraceTabView: View {
             VStack(spacing: 0) {
                 headers(in: reader.size)
                 indicator(in: reader.size)
+                viewForIndex(selectedIndex)
             }
         }
     }
