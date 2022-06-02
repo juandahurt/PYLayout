@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 public struct PuraceTabView<T: View>: View {
-    let titles: [String] = ["Acerca de", "Imágenes", "Ubicación"]
+    let titles: [String] = ["Acerca de", "Imágenes"]
     @State var selectedIndex = 0
     @State var indicatorOffset: CGFloat = .zero
     var viewForIndex: (Int) -> T
@@ -55,7 +55,13 @@ public struct PuraceTabView<T: View>: View {
             VStack(spacing: 0) {
                 headers(in: reader.size)
                 indicator(in: reader.size)
-                viewForIndex(selectedIndex)
+                ZStack {
+                    ForEach(0..<titles.count) { index in
+                        viewForIndex(index)
+                            .opacity(index == selectedIndex ? 1 : 0)
+                    }
+                }.clipped()
+                    .contentShape(Rectangle())
             }
         }
     }
