@@ -40,6 +40,9 @@ struct MenuView: View {
                     NavigationLink("Grid") {
                         GridExample()
                     }
+                    NavigationLink("Tab") {
+                        TabExample()
+                    }
                 }
             }
             .navigationTitle("Purace")
