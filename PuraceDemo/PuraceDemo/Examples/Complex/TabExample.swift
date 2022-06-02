@@ -31,7 +31,7 @@ struct TabExample: View {
         )
     
     var body: some View {
-        PuraceTabView { index in
+        PuraceTabView(titles: ["Acerca de", "Imágenes"]) { index in
             Group {
                 switch index {
                 case 0:

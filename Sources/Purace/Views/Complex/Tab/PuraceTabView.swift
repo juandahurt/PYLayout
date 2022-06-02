@@ -9,12 +9,13 @@ import Foundation
 import SwiftUI
 
 public struct PuraceTabView<T: View>: View {
-    let titles: [String] = ["Acerca de", "Imágenes"]
+    let titles: [String]
     @State var selectedIndex = 0
     @State var indicatorOffset: CGFloat = .zero
     var viewForIndex: (Int) -> T
     
-    public init(viewForIndex: @escaping (Int) -> T) {
+    public init(titles: [String], viewForIndex: @escaping (Int) -> T) {
+        self.titles = titles
         self.viewForIndex = viewForIndex
     }
     
