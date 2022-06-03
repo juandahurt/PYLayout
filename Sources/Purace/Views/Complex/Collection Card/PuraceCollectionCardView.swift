@@ -12,6 +12,7 @@ public struct PuraceCollectionCardView: View {
     @State var image = UIImage()
     @State var dragOffset: CGSize = .zero
     @State var dragOpacity: Double = 1
+    @State var lastCardOpacity: Double = 1
     
     private let firstCardSize: CGSize
     private let onCardTapped: ((PuraceCollectionCardData) -> Void)?
@@ -44,26 +45,18 @@ public struct PuraceCollectionCardView: View {
             maxWidth = firstCardSize.width - CGFloat(numberOfCards - index - 1) * 10
             maxHeight = firstCardSize.height - CGFloat(numberOfCards - index - 1) * 10
         }
-        let possibleWidth = firstCardSize.width - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.7
-        let possibleHeight = firstCardSize.height - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.7
+        let possibleWidth = firstCardSize.width - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.1
+        let possibleHeight = firstCardSize.height - CGFloat(numberOfCards - index) * 10 - dragOffset.width * 0.1
         return CGSize(
             width: min(possibleWidth, maxWidth),
             height: min(possibleHeight, maxHeight)
         )
     }
     
-    func getShadowOpacity(forViewAt index: Int) -> Double {
-        guard index != numberOfCards - 1 else {
-            return 0
-        }
-        guard index != numberOfCards - 2 else {
-            if dragOpacity > 1.0 - 1.0 / Double(numberOfCards - index) {
-                return 1.0 - 1.0 / Double(numberOfCards - index)
-            } else {
-                return dragOpacity
-            }
-        }
-        return 1.0 - 1.0 / Double(numberOfCards - index)
+    func getCardOpacity(forCardAt index: Int) -> Double {
+        guard index != cards.count - 1 else { return dragOpacity }
+        guard index != 0 else { return lastCardOpacity }
+        return 1
     }
     
     func getHorizontalOffset(forCardAt index: Int) -> CGFloat {
@@ -96,11 +89,10 @@ public struct PuraceCollectionCardView: View {
                             Spacer(minLength: 0)
                         }
                     }.padding()
-                    Color.white.opacity(getShadowOpacity(forViewAt: index))
                 }
                 .frame(width: getSize(at: index).width, height: getSize(at: index).height)
                 .cornerRadius(5)
-                .opacity(index == cards.count - 1 ? dragOpacity : 1)
+                .opacity(getCardOpacity(forCardAt: index))
                 .offset(x: getHorizontalOffset(forCardAt: index), y: 0)
                 .offset(x: index == numberOfCards - 1 ? dragOffset.width : .zero, y: .zero)
                 .onTapGesture {
@@ -112,16 +104,27 @@ public struct PuraceCollectionCardView: View {
                 .simultaneousGesture(
                     DragGesture(minimumDistance: 10, coordinateSpace: .global)
                         .onChanged({ value in
-                            if value.translation.width < 0 && index == numberOfCards - 1 {
+                            if value.translation.width < 20 && index == numberOfCards - 1 {
                                 dragOffset = value.translation
-                                dragOpacity = (-1/value.translation.width) * 20
-                            } else if value.translation.width >= 0 {
-                                dragOpacity = 1
+                                if value.translation.width >= 0 {
+                                    dragOpacity = 1
+                                } else {
+                                    dragOpacity = (-1/value.translation.width) * 95
+                                }
                             }
                         })
                         .onEnded({ value in
-                            if dragOpacity < 0.4 {
+                            if dragOpacity < 0.55 {
                                 next()
+                                lastCardOpacity = 0
+                                withAnimation(.linear(duration: 0.2).delay(0.4)) {
+                                    lastCardOpacity = 1
+                                }
+                            } else {
+                                withAnimation(.linear(duration: 0.2)) {
+                                    dragOffset = .zero
+                                    dragOpacity = 1
+                                }
                             }
                             dragOpacity = 1
                             dragOffset = .zero
