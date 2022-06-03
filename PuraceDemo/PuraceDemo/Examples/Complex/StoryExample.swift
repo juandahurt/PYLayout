@@ -29,7 +29,7 @@ struct StoryExample: View {
                 title: "Third title",
                 subtitle: "La Ajliyh dlkjsouoy ojsf del Cauca es una universidad pública de Colombia, sujeta a inspección y vigilancia por medio de la Ley 174Sholj ljlih osdfyán, "
             )
-        ])
+        ]).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.55)
         Spacer()
     }
 }

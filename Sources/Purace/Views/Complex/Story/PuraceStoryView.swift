@@ -37,44 +37,47 @@ public struct PuraceStoryView: View {
     }
     
     public var body: some View {
-        ZStack {
-            PuraceImageView(url: stories[currentIndex].image)
-            LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
-            VStack {
-                Spacer()
-                HStack {
-                    PuraceTextView(stories[currentIndex].title, fontSize: 16, textColor: .white, weight: .medium)
+        GeometryReader { outterReader in
+            ZStack {
+                PuraceImageView(url: stories[currentIndex].image)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: outterReader.size.width)
+                Color.black.opacity(0.3)
+                VStack(spacing: 8) {
+                    Spacer()
+                    HStack {
+                        PuraceTextView(stories[currentIndex].title, fontSize: 18, textColor: .white, weight: .medium)
+                        Spacer()
+                    }
+                    HStack {
+                        PuraceTextView(stories[currentIndex].subtitle, fontSize: 14, textColor: .white)
+                        Spacer()
+                    }
+                }.padding()
+                VStack {
+                    indicators
                     Spacer()
                 }
-                HStack {
-                    PuraceTextView(stories[currentIndex].subtitle, fontSize: 12, textColor: .white)
-                    Spacer()
+                    .padding(5)
+                GeometryReader { innerReader in
+                    HStack {
+                        Color.gray
+                            .opacity(0.001)
+                            .frame(width: innerReader.size.width * 0.4)
+                            .onTapGesture {
+                                back()
+                            }
+                        Spacer()
+                        Color.gray // When opacity = 0 or the color is `clear`, tap gesture doesn't work :c
+                            .opacity(0.001)
+                            .frame(width: innerReader.size.width * 0.4)
+                            .onTapGesture {
+                                next()
+                            }
+                    }
+                    
                 }
-            }.padding()
-            VStack {
-                indicators
-                Spacer()
             }
-                .padding(5)
-            GeometryReader { geometry in
-                HStack {
-                    Color.gray
-                        .opacity(0.001)
-                        .frame(width: geometry.size.width * 0.4)
-                        .onTapGesture {
-                            back()
-                        }
-                    Spacer()
-                    Color.gray // When opacity = 0 or the color is `clear`, tap gesture doesn't work :c
-                        .opacity(0.001)
-                        .frame(width: geometry.size.width * 0.4)
-                        .onTapGesture {
-                            next()
-                        }
-                }
-                
-            }
-        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.33)
-        
+        }
     }
 }
