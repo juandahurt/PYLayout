@@ -30,6 +30,26 @@ struct TabExample: View {
             longitudinalMeters: 750
         )
     
+    let urls = [
+        URL(string: "https://elturismoencolombia.com/wp-content/uploads/2018/06/popayan_iglesia_santo_domingo_colombia_travel.jpg"),
+        URL(string: "https://live.staticflickr.com/3678/9998758505_11f317ab55_b.jpg"),
+        URL(string: "https://upload.wikimedia.org/wikipedia/commons/7/71/Casa_en_donde_vivi%C3%B3_y_muri%C3%B3_el_Maestro_Guillermo_Le%C3%B3n_Valencia.jpg"),
+        URL(string: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Iglesia_San_Francisco_2.JPG"),
+        URL(string: "https://c8.alamy.com/zoomses/9/6c76df2a20324b87b4bda7eefe0012f9/dfy7wh.jpg"),
+        URL(string: "https://upload.wikimedia.org/wikipedia/commons/0/0f/La_Capilla_de_Belen.jpg"),
+        URL(string: "https://elturismoencolombia.com/wp-content/uploads/2018/06/popayan_iglesia_san_agustin_colombia_travel.jpg"),
+    ]
+    
+    func image(url: URL?) -> some View {
+        Color.clear
+            .background(
+                PuraceImageView(url: url)
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+            )
+            .clipped()
+    }
+    
     var body: some View {
         PuraceTabView(titles: ["Acerca de", "Imágenes"]) { index in
             Group {
@@ -38,24 +58,17 @@ struct TabExample: View {
                     VStack {
                         Map(coordinateRegion: $region, annotationItems: [place]) { item in
                             MapMarker(coordinate: place.location, tint: .black)
-                        }.frame(height: UIScreen.main.bounds.height * 0.5)
+                        }
                         Spacer(minLength: 0)
                     }
                 default:
-                    ScrollView {
-                        PuraceVerticalGridView(columns: 2, spacing: 1) {
-                            PuraceImageView(url: URL(string: "https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"))
-                                .frame(height: 200)
-                            PuraceImageView(url: URL(string: "https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"))
-                                .frame(height: 200)
-                            PuraceImageView(url: URL(string: "https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"))
-                                .frame(height: 200)
-                            PuraceImageView(url: URL(string: "https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"))
-                                .frame(height: 200)
+                    PuraceHorizontalGridView {
+                        ForEach(urls.indices) { index in
+                            image(url: urls[index])
                         }
                     }
                 }
-            }.frame(height: UIScreen.main.bounds.height * 0.7)
+            }.frame(height: UIScreen.main.bounds.height * 0.4)
         }.onAppear {
             MKMapView.appearance().mapType = .mutedStandard
         }
