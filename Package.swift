@@ -14,11 +14,12 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMinor(from: "7.2.0")),
+        .package(url: "https://github.com/GeorgeElsham/ViewExtractor", .branch("main")),
     ],
     targets: [
         .target(
             name: "Purace",
-            dependencies: ["Kingfisher"],
+            dependencies: ["Kingfisher", "ViewExtractor"],
             resources: [
                 .copy("Resources/Fonts/Poppins/Poppins-Regular.ttf"),
                 .copy("Resources/Fonts/Poppins/Poppins-Medium.ttf"),

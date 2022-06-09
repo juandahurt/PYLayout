@@ -40,6 +40,9 @@ struct MenuView: View {
                     NavigationLink("Grid") {
                         GridExample()
                     }
+                    NavigationLink("Horizontal Grid") {
+                        HorizontalGridExample()
+                    }
                     NavigationLink("Tab") {
                         TabExample()
                     }
