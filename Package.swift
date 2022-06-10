@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMinor(from: "7.2.0")),
-        .package(url: "https://github.com/GeorgeElsham/ViewExtractor", .branch("main")),
+        .package(url: "https://github.com/GeorgeElsham/ViewExtractor", .exact("1.1.0")),
     ],
     targets: [
         .target(

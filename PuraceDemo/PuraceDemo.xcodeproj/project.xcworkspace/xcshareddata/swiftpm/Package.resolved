@@ -14,9 +14,9 @@
         "package": "ViewExtractor",
         "repositoryURL": "https://github.com/GeorgeElsham/ViewExtractor",
         "state": {
-          "branch": "main",
+          "branch": null,
           "revision": "09cc1e7bf7d1860b92b151bb0bf06ec25a9e9162",
-          "version": null
+          "version": "1.1.0"
         }
       }
     ]

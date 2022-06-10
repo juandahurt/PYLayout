@@ -9,6 +9,15 @@
           "revision": "59eb199fdb8dd47733624e8b0277822d0232579e",
           "version": "7.2.2"
         }
+      },
+      {
+        "package": "ViewExtractor",
+        "repositoryURL": "https://github.com/GeorgeElsham/ViewExtractor",
+        "state": {
+          "branch": null,
+          "revision": "09cc1e7bf7d1860b92b151bb0bf06ec25a9e9162",
+          "version": "1.1.0"
+        }
       }
     ]
   },
