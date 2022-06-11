@@ -77,19 +77,19 @@ public struct PuraceCollectionCardView: View {
             if cards.isEmpty {
                 EmptyView()
             } else {
-                ZStack(alignment: .center) {
-                    PuraceImageView(url: cards[index].backgroundImage)
-                        .frame(width: getSize(at: index).width, height: getSize(at: index).height)
-                        .aspectRatio(contentMode: .fill)
-                    LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
-                    VStack(alignment: .leading) {
-                        Spacer()
-                        HStack {
-                            PuraceTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
-                            Spacer(minLength: 0)
-                        }
-                    }.padding()
+                PuraceImageView(url: cards[index].backgroundImage) {
+                    ZStack {
+                        LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
+                        VStack(alignment: .leading) {
+                            Spacer()
+                            HStack {
+                                PuraceTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
+                                Spacer(minLength: 0)
+                            }
+                        }.padding()
+                    }.frame(width: getSize(at: index).width, height: getSize(at: index).height)
                 }
+                .aspectRatio(contentMode: .fill)
                 .frame(width: getSize(at: index).width, height: getSize(at: index).height)
                 .cornerRadius(5)
                 .opacity(getCardOpacity(forCardAt: index))
