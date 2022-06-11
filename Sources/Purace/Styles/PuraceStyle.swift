@@ -31,6 +31,17 @@ public struct PuraceStyle {
         public static let G6 = SwiftUI.Color(hex: "C4CCD3") ?? .gray
         public static let G7 = SwiftUI.Color(hex: "D7DCE1") ?? .gray
         public static let G8 = SwiftUI.Color(hex: "DFE4E8") ?? .gray
+        
+        public static let S1 = SwiftUI.Color(hex: "CECEC9") ?? .orange
+        public static let S2 = SwiftUI.Color(hex: "CFCCC8") ?? .orange
+        public static let S3 = SwiftUI.Color(hex: "E5DBCB") ?? .orange
+        public static let S4 = SwiftUI.Color(hex: "DACAB5") ?? .orange
+        public static let S5 = SwiftUI.Color(hex: "F1F2F4") ?? .orange
+        public static let S6 = SwiftUI.Color(hex: "D0CEC6") ?? .orange
+        public static let S7 = SwiftUI.Color(hex: "D4CAC6") ?? .orange
+        public static let S8 = SwiftUI.Color(hex: "C8D0CA") ?? .orange
+        
+        public static let allSkeletons: [SwiftUI.Color] = [Color.S1, Color.S2, Color.S3, Color.S4, Color.S5, Color.S6, Color.S7, Color.S8]
     }
     
     public struct Font {
