@@ -29,7 +29,7 @@ public struct PuraceButtonView: View {
         case .loud:
             return .white
         case .quiet:
-            return PuraceStyle.Color.B1
+            return PuraceStyle.Color.G1
         case .custom(_, _, let textColor):
             return textColor
         }
@@ -38,9 +38,9 @@ public struct PuraceButtonView: View {
     private func getBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return PuraceStyle.Color.B2
+            return PuraceStyle.Color.G2
         case .quiet:
-            return PuraceStyle.Color.B5
+            return PuraceStyle.Color.G6
         case .custom(let backgroundColor, _, _):
             return backgroundColor
         }
@@ -49,9 +49,9 @@ public struct PuraceButtonView: View {
     private func getOnPressedBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return PuraceStyle.Color.B1
+            return PuraceStyle.Color.G1
         case .quiet:
-            return PuraceStyle.Color.B4
+            return PuraceStyle.Color.G5
         case .custom(_, let onPressedColor, _):
             return onPressedColor
         }
