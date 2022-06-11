@@ -24,6 +24,7 @@ public struct PuraceTabView<T: View>: View {
             ForEach(0..<titles.count) { index in
                 PuraceTextView(titles[index], fontSize: 12, textColor: selectedIndex == index ? PuraceStyle.Color.N1 : PuraceStyle.Color.N4, weight: selectedIndex == index ? .medium : .regular)
                     .frame(width: size.width / CGFloat(titles.count))
+                    .background(Color.gray.opacity(0.001))
                     .onTapGesture {
                         selectedIndex = index
                         updateIndicatorOffset(size: size)
@@ -38,7 +39,7 @@ public struct PuraceTabView<T: View>: View {
                 .frame(height: 1)
                 .opacity(0.1)
             HStack {
-                PuraceStyle.Color.B2
+                PuraceStyle.Color.G2
                     .frame(width: size.width / CGFloat(titles.count), height: 3)
                 Spacer(minLength: 0)
             }.offset(x: indicatorOffset, y: 0)

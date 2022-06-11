@@ -10,25 +10,21 @@ import SwiftUI
 import Kingfisher
 
 public struct PuraceImageView: View {
+    let skeletonColor: Color
     let url: URL?
     
     public init(url: URL?) {
+        self.skeletonColor = PuraceStyle.Color.allSkeletons.randomElement()!
         self.url = url
     }
     
     public var body: some View {
         KFImage.url(url)
             .resizable()
-            .fade(duration: 0.2)
+            .appendProcessor(DownsamplingImageProcessor(size: UIScreen.main.bounds.size))
+            .scaleFactor(UIScreen.main.scale)
             .placeholder { _ in
-                GeometryReader { reader in
-                    ZStack {
-                        PuraceCircularLoaderView()
-                            .foregroundColor(PuraceStyle.Color.G3)
-                            .frame(width: reader.size.width * 0.1, height: reader.size.width * 0.1)
-                            .position(x: reader.size.width / 2, y: reader.size.height / 2)
-                    }
-                }
+                skeletonColor
             }
     }
 }
