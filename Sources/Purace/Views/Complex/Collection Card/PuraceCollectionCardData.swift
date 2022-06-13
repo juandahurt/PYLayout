@@ -15,4 +15,6 @@ public protocol PuraceCollectionCardData {
     var backgroundImage: URL? { get }
     /// Card's title
     var title: String { get }
+    /// Card's subtitle
+    var subtitle: String { get }
 }
