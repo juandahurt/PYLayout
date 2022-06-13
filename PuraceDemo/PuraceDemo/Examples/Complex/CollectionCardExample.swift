@@ -15,7 +15,7 @@ struct CollectionCardExample: View {
             Text("`PuraceCollectionCardView(cards: ...)`")
                 .padding()
             PuraceCollectionCardView(
-                firstCardSize: .init(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.8),
+                firstCardSize: .init(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.85),
                 cards: [
                     MockCard("https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"),
                     MockCard("https://upload.wikimedia.org/wikipedia/commons/a/ac/Froil%C3%A1n_Largacha_Hurtado.jpg"),
@@ -33,7 +33,7 @@ struct MockCard: PuraceCollectionCardData {
     var deepLink: String = ""
     var backgroundImage: URL?
     var title: String = "Froilán Largacha Hurtado"
-    var subtitle: String = "From the Palace of Versailles to the Florida Kahlo museum"
+    var subtitle: String = "From the Palacsdfdfsfdsfdffsfsfsddf sfs f e of Versailles to the Florida Kahlo museum"
     
     init(_ url: String) {
         self.backgroundImage = URL(string: url)
