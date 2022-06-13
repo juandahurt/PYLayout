@@ -88,6 +88,7 @@ public struct PuraceCollectionCardView: View {
                             }
                             HStack {
                                 PuraceTextView(cards[index].subtitle, fontSize: 12, textColor: .white, weight: .regular)
+                                    .lineLimit(2)
                                 Spacer(minLength: 0)
                             }
                         }.padding()
