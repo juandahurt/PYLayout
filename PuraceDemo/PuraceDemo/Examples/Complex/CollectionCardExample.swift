@@ -33,6 +33,7 @@ struct MockCard: PuraceCollectionCardData {
     var deepLink: String = ""
     var backgroundImage: URL?
     var title: String = "Froilán Largacha Hurtado"
+    var subtitle: String = "From the Palace of Versailles to the Florida Kahlo museum"
     
     init(_ url: String) {
         self.backgroundImage = URL(string: url)

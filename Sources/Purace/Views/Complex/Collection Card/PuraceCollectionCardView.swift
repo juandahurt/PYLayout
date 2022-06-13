@@ -80,10 +80,14 @@ public struct PuraceCollectionCardView: View {
                 PuraceImageView(url: cards[index].backgroundImage) {
                     ZStack {
                         LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.35)]), startPoint: .top, endPoint: .center)
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 15) {
                             Spacer()
                             HStack {
-                                PuraceTextView(cards[index].title, fontSize: 12, textColor: .white, weight: .medium)
+                                PuraceTextView(cards[index].title, fontSize: 18, textColor: .white, weight: .regular)
+                                Spacer(minLength: 0)
+                            }
+                            HStack {
+                                PuraceTextView(cards[index].subtitle, fontSize: 12, textColor: .white, weight: .regular)
                                 Spacer(minLength: 0)
                             }
                         }.padding()
@@ -114,7 +118,7 @@ public struct PuraceCollectionCardView: View {
                             }
                         })
                         .onEnded({ value in
-                            if dragOpacity < 0.55 {
+                            if dragOpacity < 0.75 {
                                 next()
                                 lastCardOpacity = 0
                                 withAnimation(.linear(duration: 0.2).delay(0.4)) {
