@@ -29,6 +29,9 @@ struct MenuView: View {
                     NavigationLink("Image") {
                         ImageExample()
                     }
+                    NavigationLink("Accordion") {
+                        AccordionExample()
+                    }
                 }
                 Section(header: Text("Complex")) {
                     NavigationLink("Collection card") {

@@ -17,6 +17,7 @@ public struct PuraceStyle {
         public static let N3 = SwiftUI.Color(hex: "636363") ?? .black
         public static let N4 = SwiftUI.Color(hex: "808080") ?? .black
         public static let N5 = SwiftUI.Color(hex: "8D8D8D") ?? .black
+        public static let N8 = SwiftUI.Color(hex: "EEEEEE") ?? .black
         
         public static let B1 = SwiftUI.Color(hex: "4E82DD") ?? .blue
         public static let B2 = SwiftUI.Color(hex: "6491DF") ?? .blue
