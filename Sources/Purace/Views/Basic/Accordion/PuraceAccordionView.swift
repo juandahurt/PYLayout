@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-public struct PuraceAccordionView: View {
+public struct PuraceAccordionView<Content: View>: View {
     private let closeColor = Color.white
-    private let openColor = PuraceStyle.Color.G8
+    private let openColor = PuraceStyle.Color.G8.opacity(0.3)
     
     private let openForegroundColor = PuraceStyle.Color.N1
     private let closeForegroundColor = PuraceStyle.Color.G1
@@ -19,14 +19,16 @@ public struct PuraceAccordionView: View {
     @State var rotation: CGFloat = 270
     
     let title: String
+    let content: Content
     
-    public init(title: String) {
+    public init(title: String, _ content: () -> Content) {
         self.title = title
+        self.content = content()
     }
     
     var header: some View {
         HStack {
-            PuraceTextView(title, fontSize: 14, weight: .medium)
+            PuraceTextView(title, fontSize: 14, textColor: isOpen ? openForegroundColor : closeForegroundColor, weight: .medium)
             Spacer()
             Image(systemName: "chevron.left")
                 .foregroundColor(isOpen ? openForegroundColor : closeForegroundColor)
@@ -49,8 +51,12 @@ public struct PuraceAccordionView: View {
     }
     
     public var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             header
+            content
+                .frame(maxWidth: .greatestFiniteMagnitude, maxHeight: !isOpen ? 0 : .none)
+                .clipped()
+                .animation(.easeOut(duration: 0.2))
         }
     }
 }
