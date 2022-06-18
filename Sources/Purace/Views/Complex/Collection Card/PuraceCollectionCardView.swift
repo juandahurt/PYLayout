@@ -67,9 +67,9 @@ public struct PuraceCollectionCardView: View {
         if index == numberOfCards - 2 {
             minOffset = 0
         } else {
-            minOffset = CGFloat((numberOfCards - index - 1) * 15)
+            minOffset = CGFloat((numberOfCards - index - 1) * 25)
         }
-        return max(CGFloat((numberOfCards - index) * 15) + dragOffset.width * 0.5, minOffset)
+        return max(CGFloat((numberOfCards - index) * 25) + dragOffset.width * 0.5, minOffset)
     }
     
     func card(at index: Int) -> some View {
@@ -96,9 +96,9 @@ public struct PuraceCollectionCardView: View {
                 }
                 .aspectRatio(contentMode: .fill)
                 .frame(width: getSize(at: index).width, height: getSize(at: index).height)
-                .cornerRadius(5)
+                .cornerRadius(15)
                 .opacity(getCardOpacity(forCardAt: index))
-                .offset(x: getHorizontalOffset(forCardAt: index), y: 0)
+                .offset(x: getHorizontalOffset(forCardAt: index) - 15, y: 0)
                 .offset(x: index == numberOfCards - 1 ? dragOffset.width : .zero, y: .zero)
                 .onTapGesture {
                     if index == numberOfCards - 1 {
