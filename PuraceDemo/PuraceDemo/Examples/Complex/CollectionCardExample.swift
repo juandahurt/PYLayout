@@ -15,7 +15,7 @@ struct CollectionCardExample: View {
             Text("`PuraceCollectionCardView(cards: ...)`")
                 .padding()
             PuraceCollectionCardView(
-                firstCardSize: .init(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.width * 0.85),
+                firstCardSize: .init(width: UIScreen.main.bounds.height * 0.35, height: UIScreen.main.bounds.width * 0.9),
                 cards: [
                     MockCard("https://www.biografiasyvidas.com/biografia/c/fotos/caldas_francisco_jose_2.jpg"),
                     MockCard("https://upload.wikimedia.org/wikipedia/commons/a/ac/Froil%C3%A1n_Largacha_Hurtado.jpg"),
