@@ -32,6 +32,9 @@ struct MenuView: View {
                     NavigationLink("Accordion") {
                         AccordionExample()
                     }
+                    NavigationLink("Modal") {
+                        ModalExample()
+                    }
                 }
                 Section(header: Text("Complex")) {
                     NavigationLink("Collection card") {
