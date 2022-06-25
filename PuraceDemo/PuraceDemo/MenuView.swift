@@ -52,6 +52,9 @@ struct MenuView: View {
                     NavigationLink("Tab") {
                         TabExample()
                     }
+                    NavigationLink("Image Viewer") {
+                        ImageViewerExample()
+                    }
                 }
             }
             .navigationTitle("Purace")
