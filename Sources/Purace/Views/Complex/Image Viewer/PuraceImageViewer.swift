@@ -16,6 +16,7 @@ public struct PuraceImageViewer: View {
     @State var dragOffset: CGFloat = .zero
     @State var backgroundOpacity: Double = 1
     @State var hasDroppedTheImage = false
+    @State var dragInitialTime: Date?
     
     public init(url: URL?, isVisible: Binding<Bool>) {
         let colors: [Color] = [
@@ -27,6 +28,13 @@ public struct PuraceImageViewer: View {
         backgroundColor = colors.randomElement()!
         self.url = url
         self.isVisible = isVisible
+    }
+    
+    private func differenceBeetwenInitialDragTime(and date: Date) -> Double {
+        guard let dragInitialTime = dragInitialTime else {
+            return .zero
+        }
+        return date.timeIntervalSince(dragInitialTime) * 1000
     }
     
     public var body: some View {
@@ -41,25 +49,44 @@ public struct PuraceImageViewer: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
+                            if dragInitialTime == nil {
+                                dragInitialTime = Date()
+                            }
                             let translation = value.translation.height
                             dragOffset = translation
                             backgroundOpacity = 1 - abs(translation) * 0.001
                         }
                         .onEnded { value in
-                            withAnimation {
-                                backgroundOpacity = 1
+                            let diff = differenceBeetwenInitialDragTime(and: Date())
+                            if diff <= 150 {
+                                let translation = value.translation.height
+                                withAnimation {
+                                    let screenHeight = UIScreen.main.bounds.height * 0.75
+                                    dragOffset = translation > 0 ? screenHeight : -screenHeight
+                                }
+                                withAnimation {
+                                    backgroundOpacity = 0
+                                    opacity = 0
+                                }
+                            } else {
+                                withAnimation {
+                                    backgroundOpacity = 1
+                                }
+                                hasDroppedTheImage = true
+                                dragOffset = .zero
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                                    hasDroppedTheImage = false
+                                }
                             }
-                            hasDroppedTheImage = true
-                            dragOffset = .zero
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                                hasDroppedTheImage = false
-                            }
+                            dragInitialTime = nil
                         }
                 )
         }
         .edgesIgnoringSafeArea(.all)
         .animation(.easeIn)
-        .onChange(of: isVisible.wrappedValue) { newValue in
+        .onChange(of: isVisible.wrappedValue) { _ in
+            dragOffset = 0
+            backgroundOpacity = 1
             withAnimation {
                 opacity = 1
             }
