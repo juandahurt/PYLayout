@@ -17,6 +17,7 @@ public struct PuraceImageViewer: View {
     @State var backgroundOpacity: Double = 1
     @State var hasDroppedTheImage = false
     @State var dragInitialTime: Date?
+    @State var scale: CGFloat = 1 // zoom
     
     public init(url: URL?, isVisible: Binding<Bool>) {
         let colors: [Color] = [
@@ -37,47 +38,63 @@ public struct PuraceImageViewer: View {
         return date.timeIntervalSince(dragInitialTime) * 1000
     }
     
+    var image: some View {
+        PuraceImageView(url: url)
+            .scaledToFit()
+            .frame(maxHeight: UIScreen.main.bounds.height * 0.75)
+            .offset(x: 0, y: dragOffset)
+            .animation(hasDroppedTheImage ? .easeOut(duration: 0.35) : .none)
+            .scaleEffect(scale)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if dragInitialTime == nil {
+                            dragInitialTime = Date()
+                        }
+                        let translation = value.translation.height
+                        dragOffset = translation
+                        backgroundOpacity = 1 - abs(translation) * 0.001
+                    }
+                    .onEnded { value in
+                        let diff = differenceBeetwenInitialDragTime(and: Date())
+                        if diff <= 150 {
+                            let translation = value.translation.height
+                            withAnimation {
+                                let screenHeight = UIScreen.main.bounds.height * 0.65
+                                dragOffset = translation > 0 ? screenHeight : -screenHeight
+                            }
+                            isVisible = false
+                        } else {
+                            withAnimation {
+                                backgroundOpacity = 1
+                            }
+                            hasDroppedTheImage = true
+                            dragOffset = .zero
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                                hasDroppedTheImage = false
+                            }
+                        }
+                        dragInitialTime = nil
+                    }
+            )
+            .simultaneousGesture(
+                MagnificationGesture()
+                    .onChanged { value in
+                        scale = value
+                    }
+                    .onEnded { value in
+                        if value < 1 {
+                            scale = 1
+                        }
+                    }
+            )
+    }
+    
     public var body: some View {
         ZStack {
             backgroundColor
                 .opacity(backgroundOpacity)
-            PuraceImageView(url: url)
-                .scaledToFit()
-                .frame(maxHeight: UIScreen.main.bounds.height * 0.75)
-                .offset(x: 0, y: dragOffset)
-                .animation(hasDroppedTheImage ? .easeOut(duration: 0.35) : .none)
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            if dragInitialTime == nil {
-                                dragInitialTime = Date()
-                            }
-                            let translation = value.translation.height
-                            dragOffset = translation
-                            backgroundOpacity = 1 - abs(translation) * 0.001
-                        }
-                        .onEnded { value in
-                            let diff = differenceBeetwenInitialDragTime(and: Date())
-                            if diff <= 150 {
-                                let translation = value.translation.height
-                                withAnimation {
-                                    let screenHeight = UIScreen.main.bounds.height * 0.65
-                                    dragOffset = translation > 0 ? screenHeight : -screenHeight
-                                }
-                                isVisible = false
-                            } else {
-                                withAnimation {
-                                    backgroundOpacity = 1
-                                }
-                                hasDroppedTheImage = true
-                                dragOffset = .zero
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                                    hasDroppedTheImage = false
-                                }
-                            }
-                            dragInitialTime = nil
-                        }
-                )
+            image
         }
         .edgesIgnoringSafeArea(.all)
         .animation(.easeIn)
