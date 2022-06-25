@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 public struct PuraceImageViewer: View {
-    var isVisible: Binding<Bool>
+    @Binding var isVisible: Bool
     let backgroundColor: Color
     let url: URL?
     @State var opacity: Double = 0
@@ -27,7 +27,7 @@ public struct PuraceImageViewer: View {
         ]
         backgroundColor = colors.randomElement()!
         self.url = url
-        self.isVisible = isVisible
+        self._isVisible = isVisible
     }
     
     private func differenceBeetwenInitialDragTime(and date: Date) -> Double {
@@ -61,13 +61,10 @@ public struct PuraceImageViewer: View {
                             if diff <= 150 {
                                 let translation = value.translation.height
                                 withAnimation {
-                                    let screenHeight = UIScreen.main.bounds.height * 0.75
+                                    let screenHeight = UIScreen.main.bounds.height * 0.65
                                     dragOffset = translation > 0 ? screenHeight : -screenHeight
                                 }
-                                withAnimation {
-                                    backgroundOpacity = 0
-                                    opacity = 0
-                                }
+                                isVisible = false
                             } else {
                                 withAnimation {
                                     backgroundOpacity = 1
@@ -84,11 +81,18 @@ public struct PuraceImageViewer: View {
         }
         .edgesIgnoringSafeArea(.all)
         .animation(.easeIn)
-        .onChange(of: isVisible.wrappedValue) { _ in
-            dragOffset = 0
-            backgroundOpacity = 1
-            withAnimation {
-                opacity = 1
+        .onChange(of: $isVisible.wrappedValue) { value in
+            if value {
+                dragOffset = 0
+                backgroundOpacity = 1
+                withAnimation {
+                    opacity = 1
+                }
+            } else {
+                withAnimation {
+                    backgroundOpacity = 0
+                    opacity = 0
+                }
             }
         }
         .opacity(opacity)
