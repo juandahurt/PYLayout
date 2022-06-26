@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 public struct PuraceImageViewer: View {
     @Binding var isVisible: Bool
@@ -75,25 +76,28 @@ public struct PuraceImageViewer: View {
                                 dragAnimationDuration = 0.35
                             }
                             dragInitialTime = nil
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + dragAnimationDuration) {
-//                                hasDroppedTheImage = false
-//                            }
                         }
                     }
             )
             .simultaneousGesture(
                 MagnificationGesture()
                     .onChanged { value in
-                        guard value < 3.5 else { return }
-                        let aux = max(0.6, value)
-                        if value > 1 {
-                            if aux < finalScale {
-                                currentScale = finalScale
+                        guard value > 0.6 else {
+                            currentScale = 0.6
+                            return
+                        }
+                        guard currentScale < 3.5 else {
+                            currentScale = 3.5
+                            return
+                        }
+                        if currentScale > 1 {
+                            if value < finalScale {
+                                currentScale = finalScale + value - 1
                             } else {
-                                currentScale = aux
+                                currentScale = value
                             }
                         } else {
-                            currentScale = aux
+                            currentScale = value
                         }
                     }
                     .onEnded { value in
@@ -107,6 +111,14 @@ public struct PuraceImageViewer: View {
                         }
                     }
             )
+            .simultaneousGesture(
+                TapGesture(count: 2).onEnded {
+                    withAnimation {
+                        currentScale = 1
+                    }
+                    finalScale = 1
+                }
+            )
     }
     
     var image: some View {
@@ -116,7 +128,6 @@ public struct PuraceImageViewer: View {
             .animation(hasDroppedTheImage ? .easeOut(duration: 0.35) : .none)
             .scaleEffect(currentScale)
             .frame(maxHeight: maximumImageHeight)
-            .transition(.slide)
     }
     
     public var body: some View {
