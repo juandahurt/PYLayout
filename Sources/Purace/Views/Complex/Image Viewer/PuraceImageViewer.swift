@@ -19,10 +19,10 @@ public struct PuraceImageViewer: View {
     @State var dragInitialTime: Date?
     
     @State var currentScale: CGFloat = 1
-    @State var finalScale: CGFloat = 1 // zoom
+    @State var finalScale: CGFloat = 1
     
-    @State var dragAccumulator: CGSize = .zero
-    @State var imageSize: CGSize = .zero
+    @State var dragAnimationDuration: Double = 0
+    
     private let maximumImageHeight = UIScreen.main.bounds.height * 0.65
     
     public init(url: URL?, isVisible: Binding<Bool>) {
@@ -35,6 +35,7 @@ public struct PuraceImageViewer: View {
         backgroundColor = colors.randomElement()!
         self.url = url
         self._isVisible = isVisible
+        
     }
     
     private func differenceBeetwenInitialDragTime(and date: Date) -> Double {
@@ -46,6 +47,7 @@ public struct PuraceImageViewer: View {
     
     var draggableArea: some View {
         Color.black
+            .animation(.none)
             .opacity(0.001)
             .gesture(
                 DragGesture()
@@ -57,22 +59,12 @@ public struct PuraceImageViewer: View {
                             let translation = value.translation.height
                             dragOffset.height = translation
                             backgroundOpacity = 1 - abs(translation) * 0.001
-                        } else {
-//                            dragOffset.width += value.translation.width + dragAccumulator.width
-//                            dragOffset.width *= 1/currentScale
-//                            dragOffset.height += value.translation.height + dragAccumulator.width
-//                            dragOffset.height *= 1/currentScale
                         }
                     }
                     .onEnded { value in
                         if currentScale == 1 {
                             let diff = differenceBeetwenInitialDragTime(and: Date())
                             if diff <= 150 {
-                                let translation = value.translation.height
-                                withAnimation {
-                                    let screenHeight = UIScreen.main.bounds.height * 0.65
-                                    dragOffset.height = translation > 0 ? screenHeight : -screenHeight
-                                }
                                 isVisible = false
                             } else {
                                 withAnimation {
@@ -80,14 +72,12 @@ public struct PuraceImageViewer: View {
                                 }
                                 hasDroppedTheImage = true
                                 dragOffset = .zero
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                                    hasDroppedTheImage = false
-                                }
+                                dragAnimationDuration = 0.35
                             }
                             dragInitialTime = nil
-                        } else {
-                            dragAccumulator.width += value.translation.width
-                            dragAccumulator.height += value.translation.height
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + dragAnimationDuration) {
+//                                hasDroppedTheImage = false
+//                            }
                         }
                     }
             )
@@ -108,7 +98,9 @@ public struct PuraceImageViewer: View {
                     }
                     .onEnded { value in
                         if value < 1 {
-                            currentScale = 1
+                            withAnimation {
+                                currentScale = 1
+                            }
                             finalScale = 1
                         } else {
                             finalScale = currentScale
@@ -123,20 +115,8 @@ public struct PuraceImageViewer: View {
             .offset(x: dragOffset.width, y: dragOffset.height)
             .animation(hasDroppedTheImage ? .easeOut(duration: 0.35) : .none)
             .scaleEffect(currentScale)
-            .overlay(
-                GeometryReader { reader in
-                    Color.black.opacity(0.001)
-                        .onAppear {
-                            updateImageSize(from: reader.size)
-                        }
-                }
-            )
-        .frame(maxHeight: maximumImageHeight)
-    }
-    
-    func updateImageSize(from size: CGSize) {
-        imageSize = size
-        print(size)
+            .frame(maxHeight: maximumImageHeight)
+            .transition(.slide)
     }
     
     public var body: some View {
@@ -147,22 +127,10 @@ public struct PuraceImageViewer: View {
             draggableArea
         }
         .edgesIgnoringSafeArea(.all)
-        .animation(.easeIn)
-        .onChange(of: $isVisible.wrappedValue) { value in
-            if value {
-                dragOffset = .zero
-                dragAccumulator = .zero
-                backgroundOpacity = 1
-                withAnimation {
-                    opacity = 1
-                }
-            } else {
-                withAnimation {
-                    backgroundOpacity = 0
-                    opacity = 0
-                }
-            }
+        .transition(.opacity.animation(.linear))
+        .onAppear {
+            dragOffset = .zero
+            backgroundOpacity = 1
         }
-        .opacity(opacity)
     }
 }

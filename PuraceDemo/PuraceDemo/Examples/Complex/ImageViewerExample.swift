@@ -13,17 +13,14 @@ struct ImageViewerExample: View {
     @State var isVisible = false
     
     var body: some View {
-        ZStack {
-            VStack {
-                PuraceButtonView("Mostrar imagen") {
-                    isVisible.toggle()
-                }
-                Spacer()
+        VStack {
+            PuraceButtonView("Mostrar imagen") {
+                isVisible.toggle()
             }
-            PuraceImageViewer(
-                url: URL(string: "https://payan-dev-images.s3.us-east-2.amazonaws.com/santo-domingo.jpg"),
-                isVisible: $isVisible
-            )
-        }
+            Spacer()
+        }.imageViewer(
+            url: URL(string: "https://payan-dev-images.s3.us-east-2.amazonaws.com/santo-domingo.jpg"),
+            isVisible: $isVisible
+        )
     }
 }
