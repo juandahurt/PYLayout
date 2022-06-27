@@ -8,16 +8,16 @@
 import Foundation
 import SwiftUI
 
-struct PuraceImageViewerModifier: ViewModifier {
+public struct PuraceImageViewerModifier: ViewModifier {
     let url: URL?
     @Binding var isVisible: Bool
     
-    init(url: URL?, isVisible: Binding<Bool>) {
+    public init(url: URL?, isVisible: Binding<Bool>) {
         self.url = url
         self._isVisible = isVisible
     }
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         ZStack {
             content
             if isVisible {
