@@ -67,7 +67,7 @@ public struct PuraceImageViewer: View {
                     .onEnded { value in
                         if currentScale == 1 {
                             let diff = differenceBeetwenInitialDragTime(and: Date())
-                            if diff <= 150 {
+                            if diff <= 150 || abs(dragOffset.height) >= UIScreen.main.bounds.height * 0.4  {
                                 withAnimation {
                                     isImageVisible = false
                                 }
