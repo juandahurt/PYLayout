@@ -16,15 +16,11 @@ public struct PuraceImageViewer: View {
     @State var opacity: Double = 0
     @State var dragOffset: CGSize = .zero
     @State var backgroundOpacity: Double = 1
-    @State var hasDroppedTheImage = false
+    @State var hasDraggedTheImage = false
     @State var dragInitialTime: Date?
     
     @State var currentScale: CGFloat = 1
     @State var finalScale: CGFloat = 1
-    
-    @State var isImageVisible = true
-    
-    @State var dragAnimationDuration: Double = 0
     
     private let maximumImageHeight = UIScreen.main.bounds.height * 0.65
     
@@ -55,6 +51,7 @@ public struct PuraceImageViewer: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
+                        hasDraggedTheImage = true
                         if currentScale == 1 {
                             if dragInitialTime == nil {
                                 dragInitialTime = Date()
@@ -68,17 +65,12 @@ public struct PuraceImageViewer: View {
                         if currentScale == 1 {
                             let diff = differenceBeetwenInitialDragTime(and: Date())
                             if diff <= 150 || abs(dragOffset.height) >= UIScreen.main.bounds.height * 0.4  {
-                                withAnimation {
-                                    isImageVisible = false
-                                }
-                                isVisible = false
+                                hideView()
                             } else {
                                 withAnimation {
                                     backgroundOpacity = 1
                                 }
-                                hasDroppedTheImage = true
                                 dragOffset = .zero
-                                dragAnimationDuration = 0.35
                             }
                             dragInitialTime = nil
                         }
@@ -139,7 +131,7 @@ public struct PuraceImageViewer: View {
         PuraceImageView(url: url)
             .scaledToFit()
             .offset(x: dragOffset.width, y: dragOffset.height)
-            .animation(hasDroppedTheImage ? .easeOut(duration: 0.35) : .none)
+            .animation(hasDraggedTheImage ? .easeOut(duration: 0.35) : .none)
             .scaleEffect(currentScale)
             .frame(maxHeight: maximumImageHeight)
     }
@@ -148,13 +140,29 @@ public struct PuraceImageViewer: View {
         ZStack {
             backgroundColor
                 .opacity(backgroundOpacity)
-            if isImageVisible {
-                image
-                    .transition(.move(edge: dragOffset.height > 0 ? .bottom : .top))
-            }
+            image
             draggableArea
         }
         .edgesIgnoringSafeArea(.all)
         .transition(.opacity.animation(.linear))
+    }
+}
+
+extension PuraceImageViewer {
+    private func hideImage() {
+        withAnimation {
+            if dragOffset.height > 0 {
+                dragOffset.height = UIScreen.main.bounds.height
+            } else {
+                dragOffset.height = -UIScreen.main.bounds.height
+            }
+        }
+    }
+    
+    private func hideView() {
+        hideImage()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            isVisible = false
+        }
     }
 }
