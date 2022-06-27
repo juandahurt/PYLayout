@@ -161,6 +161,9 @@ extension PuraceImageViewer {
     
     private func hideView() {
         hideImage()
+        withAnimation {
+            backgroundOpacity = 0
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             isVisible = false
         }
