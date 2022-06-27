@@ -22,6 +22,8 @@ public struct PuraceImageViewer: View {
     @State var currentScale: CGFloat = 1
     @State var finalScale: CGFloat = 1
     
+    @State var isImageVisible = true
+    
     @State var dragAnimationDuration: Double = 0
     
     private let maximumImageHeight = UIScreen.main.bounds.height * 0.65
@@ -66,6 +68,9 @@ public struct PuraceImageViewer: View {
                         if currentScale == 1 {
                             let diff = differenceBeetwenInitialDragTime(and: Date())
                             if diff <= 150 {
+                                withAnimation {
+                                    isImageVisible = false
+                                }
                                 isVisible = false
                             } else {
                                 withAnimation {
@@ -92,9 +97,18 @@ public struct PuraceImageViewer: View {
                         }
                         if currentScale > 1 {
                             if value < finalScale {
-                                currentScale = finalScale + value - 1
+                                if value < 1 {
+                                    print(value, finalScale)
+                                    currentScale = finalScale - 1 - value
+                                } else {
+                                    currentScale = finalScale + value - 1
+                                }
                             } else {
-                                currentScale = value
+                                if value < 1 {
+                                    currentScale = value
+                                } else {
+                                    currentScale = value
+                                }
                             }
                         } else {
                             currentScale = value
@@ -134,14 +148,13 @@ public struct PuraceImageViewer: View {
         ZStack {
             backgroundColor
                 .opacity(backgroundOpacity)
-            image
+            if isImageVisible {
+                image
+                    .transition(.move(edge: dragOffset.height > 0 ? .bottom : .top))
+            }
             draggableArea
         }
         .edgesIgnoringSafeArea(.all)
         .transition(.opacity.animation(.linear))
-        .onAppear {
-            dragOffset = .zero
-            backgroundOpacity = 1
-        }
     }
 }
