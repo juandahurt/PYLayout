@@ -42,6 +42,11 @@ public struct PuraceStyle {
         public static let S7 = SwiftUI.Color(hex: "D4CAC6") ?? .orange
         public static let S8 = SwiftUI.Color(hex: "C8D0CA") ?? .orange
         
+        public static let X1 = SwiftUI.Color(hex: "272627") ?? .gray
+        public static let X2 = SwiftUI.Color(hex: "3F402D") ?? .gray
+        public static let X3 = SwiftUI.Color(hex: "3B140E") ?? .gray
+        public static let X4 = SwiftUI.Color(hex: "17293E") ?? .gray
+        
         public static let allSkeletons: [SwiftUI.Color] = [Color.S1, Color.S2, Color.S3, Color.S4, Color.S5, Color.S6, Color.S7, Color.S8]
     }
     
