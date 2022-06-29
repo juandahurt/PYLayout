@@ -19,8 +19,7 @@ public struct PuraceImageViewer: View {
     @State var hasDraggedTheImage = false
     @State var dragInitialTime: Date?
     
-    @State var currentScale: CGFloat = 1
-    @State var finalScale: CGFloat = 1
+    @GestureState var scale: CGFloat = 1
     
     private let maximumImageHeight = UIScreen.main.bounds.height * 0.65
     
@@ -34,7 +33,6 @@ public struct PuraceImageViewer: View {
         backgroundColor = colors.randomElement()!
         self.url = url
         self._isVisible = isVisible
-        
     }
     
     private func differenceBeetwenInitialDragTime(and date: Date) -> Double {
@@ -52,7 +50,7 @@ public struct PuraceImageViewer: View {
                 DragGesture()
                     .onChanged { value in
                         hasDraggedTheImage = true
-                        if currentScale == 1 {
+                        if scale == 1 {
                             if dragInitialTime == nil {
                                 dragInitialTime = Date()
                             }
@@ -62,7 +60,7 @@ public struct PuraceImageViewer: View {
                         }
                     }
                     .onEnded { value in
-                        if currentScale == 1 {
+                        if scale == 1 {
                             let diff = differenceBeetwenInitialDragTime(and: Date())
                             if diff <= 150 || abs(dragOffset.height) >= UIScreen.main.bounds.height * 0.4  {
                                 hideView()
@@ -78,52 +76,10 @@ public struct PuraceImageViewer: View {
             )
             .simultaneousGesture(
                 MagnificationGesture()
-                    .onChanged { value in
-                        guard value > 0.6 else {
-                            currentScale = 0.6
-                            return
-                        }
-                        guard currentScale < 3.5 else {
-                            currentScale = 3.5
-                            return
-                        }
-                        if currentScale > 1 {
-                            if value < finalScale {
-                                if value < 1 {
-                                    print(value, finalScale)
-                                    currentScale = finalScale - 1 - value
-                                } else {
-                                    currentScale = finalScale + value - 1
-                                }
-                            } else {
-                                if value < 1 {
-                                    currentScale = value
-                                } else {
-                                    currentScale = value
-                                }
-                            }
-                        } else {
-                            currentScale = value
-                        }
-                    }
-                    .onEnded { value in
-                        if value < 1 {
-                            withAnimation {
-                                currentScale = 1
-                            }
-                            finalScale = 1
-                        } else {
-                            finalScale = currentScale
-                        }
-                    }
-            )
-            .simultaneousGesture(
-                TapGesture(count: 2).onEnded {
-                    withAnimation {
-                        currentScale = 1
-                    }
-                    finalScale = 1
-                }
+                    .updating($scale, body: { value, state, _ in
+                        guard value > 0.7 else { return }
+                        state = value
+                    })
             )
     }
     
@@ -132,7 +88,7 @@ public struct PuraceImageViewer: View {
             .scaledToFit()
             .offset(x: dragOffset.width, y: dragOffset.height)
             .animation(hasDraggedTheImage ? .easeOut(duration: 0.35) : .none)
-            .scaleEffect(currentScale)
+            .scaleEffect(scale)
             .frame(maxHeight: maximumImageHeight)
     }
     
