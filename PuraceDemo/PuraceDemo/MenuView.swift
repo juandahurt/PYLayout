@@ -35,6 +35,9 @@ struct MenuView: View {
                     NavigationLink("Modal") {
                         ModalExample()
                     }
+                    NavigationLink("Text Field") {
+                        TextFieldExample()
+                    }
                 }
                 Section(header: Text("Complex")) {
                     NavigationLink("Collection card") {
