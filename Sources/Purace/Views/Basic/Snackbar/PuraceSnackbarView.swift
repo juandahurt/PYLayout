@@ -8,17 +8,18 @@
 import Foundation
 import SwiftUI
 
-public struct PuraceSnackbarView: View {
+struct PuraceSnackbarView: View {
     @State var yOffset: CGFloat = 100
     @State var opacity: Double = 0
     
     let title: String
     let type: PuraceSnackbarType
+    @State var isVisibleAux: Bool = true
     @Binding var isVisible: Bool
     let buttonTitle: String?
     let buttonOnTap: (() -> Void)?
     
-    public init(title: String, type: PuraceSnackbarType = .info, isVisible: Binding<Bool>, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) {
+    init(title: String, type: PuraceSnackbarType = .info, isVisible: Binding<Bool>, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) {
         self.title = title
         self.type = type
         self._isVisible = isVisible
@@ -32,31 +33,76 @@ public struct PuraceSnackbarView: View {
             return PuraceStyle.Color.G1
         case .alert:
             return PuraceStyle.Color.B1
+        case .error:
+            return PuraceStyle.Color.R1
         }
     }
     
     public var body: some View {
-        HStack {
-            PuraceTextView(title, fontSize: 14, textColor: .white)
+        VStack {
             Spacer()
-            if let buttonTitle = buttonTitle {
-                PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .clear, .white)) {
-                    buttonOnTap?()
+            HStack {
+                PuraceTextView(title, fontSize: 14, textColor: .white)
+                Spacer()
+                if let buttonTitle = buttonTitle {
+                    PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .clear, .white)) {
+                        buttonOnTap?()
+                        isVisible = false
+                    }
                 }
             }
-        }
-            .lineLimit(2)
-            .padding()
-            .frame(width: UIScreen.main.bounds.width - 40)
-            .background(getBackgroundColor())
-            .cornerRadius(5)
-            .onChange(of: isVisible, perform: { isPresented in
-                withAnimation(.spring()) {
-                    yOffset = isPresented ? 0 : 100
-                    opacity = isPresented ? 1 : 0
+                .lineLimit(2)
+                .padding()
+                .frame(width: UIScreen.main.bounds.width - 40)
+                .background(getBackgroundColor())
+                .cornerRadius(5)
+                .onChange(of: isVisible, perform: { _ in
+                    withAnimation(.spring()) {
+                        yOffset = 100
+                        opacity = 0
+                    }
+                })
+                .opacity(opacity)
+                .offset(x: 0, y: yOffset)
+                .onAppear {
+                    withAnimation(.spring()) {
+                        yOffset = 0
+                        opacity = 1
+                    }
                 }
-            })
-            .opacity(opacity)
-            .offset(x: 0, y: yOffset)
+        }
+    }
+}
+
+
+struct PuraceSnackbarViewModifier: ViewModifier {
+    @Binding var isVisible: Bool
+    @State var isVisibleAux = false
+    var title: String
+    var buttonTitle: String?
+    var type: PuraceSnackbarType
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            if isVisibleAux {
+                PuraceSnackbarView(title: title, type: type, isVisible: $isVisible, buttonTitle: buttonTitle)
+            }
+        }.onChange(of: isVisible) { newValue in
+            if !newValue {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    isVisibleAux = newValue
+                }
+            } else {
+                isVisibleAux = newValue
+            }
+        }
+    }
+}
+
+
+public extension View {
+    func snackBar(title: String, isVisible: Binding<Bool>, type: PuraceSnackbarType = .info, buttonTitle: String? = nil) -> some View {
+        modifier(PuraceSnackbarViewModifier(isVisible: isVisible, title: title, buttonTitle: buttonTitle, type: type))
     }
 }
