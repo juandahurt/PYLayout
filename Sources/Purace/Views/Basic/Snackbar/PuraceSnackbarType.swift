@@ -8,5 +8,5 @@
 import Foundation
 
 public enum PuraceSnackbarType {
-    case info, alert
+    case info, alert, error
 }

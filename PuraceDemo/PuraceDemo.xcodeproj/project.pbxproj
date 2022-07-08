@@ -79,6 +79,7 @@
 		2F27BC9A2848149900B5AC8D /* Basic */ = {
 			isa = PBXGroup;
 			children = (
+				2FA9867A28373DD3000DB409 /* SnackbarExample.swift */,
 				2F1F7D7228318D9900AA30DB /* TextExample.swift */,
 				2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */,
 				2F072906283C00080098C5AF /* LoaderExample.swift */,
@@ -96,7 +97,6 @@
 				2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */,
 				2FC004082831AC250037EF10 /* StoryExample.swift */,
 				2FA986782837351B000DB409 /* GridExample.swift */,
-				2FA9867A28373DD3000DB409 /* SnackbarExample.swift */,
 				2F27BC9C284814B600B5AC8D /* TabExample.swift */,
 				2F5EFD3B284D23E2005D130A /* HorizontalGridExample.swift */,
 				2F7EC3C62867656200D5DDC6 /* ImageViewerExample.swift */,
