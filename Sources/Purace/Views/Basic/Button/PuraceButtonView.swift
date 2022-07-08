@@ -24,6 +24,29 @@ public struct PuraceButtonView: View {
         self.onTap = onTap
     }
     
+    public var body: some View {
+        Button(title) {
+            onTap?()
+        }
+        .font(PuraceStyle.Font.get(size: CGFloat(fontSize), weight: .medium))
+        .buttonStyle(PuraceButtonStyle(type: type))
+    }
+}
+
+struct PuraceButtonStyle: ButtonStyle {
+    let type: PuraceButtonType
+    
+    private func getBackgroundColor() -> Color {
+        switch type {
+        case .loud:
+            return PuraceStyle.Color.G2
+        case .quiet:
+            return .black.opacity(0.05)
+        case .custom(let backgroundColor, _, _):
+            return backgroundColor
+        }
+    }
+    
     private func getTextColor() -> Color {
         switch type {
         case .loud:
@@ -35,47 +58,23 @@ public struct PuraceButtonView: View {
         }
     }
     
-    private func getBackgroundColor() -> Color {
-        switch type {
-        case .loud:
-            return PuraceStyle.Color.G2
-        case .quiet:
-            return PuraceStyle.Color.G6
-        case .custom(let backgroundColor, _, _):
-            return backgroundColor
-        }
-    }
-    
     private func getOnPressedBackgroundColor() -> Color {
         switch type {
         case .loud:
             return PuraceStyle.Color.G1
         case .quiet:
-            return PuraceStyle.Color.G5
+            return .black.opacity(0.15)
         case .custom(_, let onPressedColor, _):
             return onPressedColor
         }
     }
     
-    public var body: some View {
-        PuraceTextView(title, fontSize: fontSize, textColor: getTextColor(), weight: .medium)
-            .onTapGesture {
-                onTap?()
-            }
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged({ _ in
-                        withAnimation(.easeIn(duration: 0.1)) {
-                            isBeingPressed = true
-                        }
-                    })
-                    .onEnded({ _ in
-                        isBeingPressed = false
-                    })
-            )
-            .padding(.horizontal)
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.horizontal, 10)
             .padding(.vertical, 5)
-            .background(isBeingPressed ? getOnPressedBackgroundColor() : getBackgroundColor())
-            .cornerRadius(4)
+            .background(configuration.isPressed ? getOnPressedBackgroundColor() : getBackgroundColor())
+            .foregroundColor(getTextColor())
+            .clipShape(RoundedRectangle(cornerRadius: 5))
     }
 }
