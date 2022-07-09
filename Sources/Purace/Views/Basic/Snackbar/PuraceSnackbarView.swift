@@ -81,12 +81,13 @@ struct PuraceSnackbarViewModifier: ViewModifier {
     var title: String
     var buttonTitle: String?
     var type: PuraceSnackbarType
+    var buttonOnTap: (() -> Void)?
     
     func body(content: Content) -> some View {
         ZStack {
             content
             if isVisibleAux {
-                PuraceSnackbarView(title: title, type: type, isVisible: $isVisible, buttonTitle: buttonTitle)
+                PuraceSnackbarView(title: title, type: type, isVisible: $isVisible, buttonTitle: buttonTitle, buttonOnTap: buttonOnTap)
             }
         }.onChange(of: isVisible) { newValue in
             if !newValue {
@@ -102,7 +103,7 @@ struct PuraceSnackbarViewModifier: ViewModifier {
 
 
 public extension View {
-    func snackBar(title: String, isVisible: Binding<Bool>, type: PuraceSnackbarType = .info, buttonTitle: String? = nil) -> some View {
-        modifier(PuraceSnackbarViewModifier(isVisible: isVisible, title: title, buttonTitle: buttonTitle, type: type))
+    func snackBar(title: String, isVisible: Binding<Bool>, type: PuraceSnackbarType = .info, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil) -> some View {
+        modifier(PuraceSnackbarViewModifier(isVisible: isVisible, title: title, buttonTitle: buttonTitle, type: type, buttonOnTap: buttonOnTap))
     }
 }
