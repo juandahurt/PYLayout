@@ -12,7 +12,7 @@ import Purace
 struct AdjustableHStackExample: View {
     var body: some View {
         ScrollView {
-            PuraceAdjustableHStack { index in
+            PuraceAdjustableHStack (builder: { index in
                 if index == 0 {
                     return ("Iglesias", URL(string: "https://elturismoencolombia.com/wp-content/uploads/2018/06/popayan_iglesia_san_agustin_colombia_travel.jpg"))
                 }
@@ -23,9 +23,11 @@ struct AdjustableHStackExample: View {
                     return ("Emblemáticos", URL(string: "https://c8.alamy.com/zoomses/9/6c76df2a20324b87b4bda7eefe0012f9/dfy7wh.jpg"))
                 }
                 return ("Gubernamentales", URL(string: "https://live.staticflickr.com/3678/9998758505_11f317ab55_b.jpg"))
-            }
-                .frame(height: 250)
-                .padding()
+            }, onElementSelected: { index in
+                print("selected: \(index)")
+            })
+            .frame(height: 250)
+            .padding()
         }
     }
 }
