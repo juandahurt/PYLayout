@@ -15,10 +15,15 @@ public struct PuraceAdjustableHStack: View {
     /// The amount of pixels that the user must drag to move around the elements.
     private let sensibility: CGFloat = 35
     
-    public init() {}
+    var builder: (Int) -> (title: String, imageUrl: URL?)
+    
+    public init(builder: @escaping (Int) -> (String, URL?)) {
+        self.builder = builder
+    }
     
     func next() {
         guard selectedIndex < 3 else { return }
+        guard currentDragValue < 0 else { return }
         selectedIndex += 1
     }
     
@@ -32,17 +37,35 @@ public struct PuraceAdjustableHStack: View {
         GeometryReader { reader in
             HStack {
                 ForEach(0..<4) { index in
-                    Color.gray
-                        .frame(width: index == selectedIndex ? reader.size.width * 0.75 : nil )
-                        .onTapGesture {
-                            if index == selectedIndex {
-                                
-                            } else {
-                                withAnimation(.spring()) {
-                                    selectedIndex = index
+                    ZStack(alignment: .bottomLeading) {
+                        Color.clear
+                            .background(
+                                ZStack {
+                                    PuraceImageView(url: builder(index).imageUrl)
+                                        .scaledToFill()
+                                    
+                                    LinearGradient(colors: [.black.opacity(0.4), .clear], startPoint: .bottom, endPoint: .top)
                                 }
+                            )
+                        
+                        if index == selectedIndex {
+                            PuraceTextView(builder(index).title, fontSize: 14, textColor: .white, weight: .medium)
+                                .padding()
+                        }
+                    }
+                    .clipped()
+                    .contentShape(Rectangle())
+                    .frame(width: index == selectedIndex ? reader.size.width * 0.75 : nil)
+                    .onTapGesture {
+                        if index == selectedIndex {
+                            
+                        } else {
+                            withAnimation(.spring()) {
+                                selectedIndex = index
                             }
                         }
+                    }
+                    .cornerRadius(5)
                 }
             }
             .gesture(
