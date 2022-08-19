@@ -58,6 +58,9 @@ struct MenuView: View {
                     NavigationLink("Image Viewer") {
                         ImageViewerExample()
                     }
+                    NavigationLink("Adjustable Stack") {
+                        AdjustableHStackExample()
+                    }
                 }
             }
             .navigationTitle("Purace")

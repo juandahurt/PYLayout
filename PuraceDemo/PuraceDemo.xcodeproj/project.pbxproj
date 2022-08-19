@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F072907283C00080098C5AF /* LoaderExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F072906283C00080098C5AF /* LoaderExample.swift */; };
+		2F1C606E28AFE76B0038E7B1 /* AdjustableHStackExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1C606D28AFE76B0038E7B1 /* AdjustableHStackExample.swift */; };
 		2F1F7D7128317E0700AA30DB /* CollectionCardExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */; };
 		2F1F7D7328318D9900AA30DB /* TextExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7228318D9900AA30DB /* TextExample.swift */; };
 		2F1F7D7528318EEE00AA30DB /* ButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		2F072906283C00080098C5AF /* LoaderExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderExample.swift; sourceTree = "<group>"; };
+		2F1C606D28AFE76B0038E7B1 /* AdjustableHStackExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableHStackExample.swift; sourceTree = "<group>"; };
 		2F1F7D7028317E0700AA30DB /* CollectionCardExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCardExample.swift; sourceTree = "<group>"; };
 		2F1F7D7228318D9900AA30DB /* TextExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExample.swift; sourceTree = "<group>"; };
 		2F1F7D7428318EEE00AA30DB /* ButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExample.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				2F27BC9C284814B600B5AC8D /* TabExample.swift */,
 				2F5EFD3B284D23E2005D130A /* HorizontalGridExample.swift */,
 				2F7EC3C62867656200D5DDC6 /* ImageViewerExample.swift */,
+				2F1C606D28AFE76B0038E7B1 /* AdjustableHStackExample.swift */,
 			);
 			path = Complex;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				2F77A234283C4AC700F143FB /* ImageExample.swift in Sources */,
 				2F5EFD3C284D23E3005D130A /* HorizontalGridExample.swift in Sources */,
 				2FA9867B28373DD3000DB409 /* SnackbarExample.swift in Sources */,
+				2F1C606E28AFE76B0038E7B1 /* AdjustableHStackExample.swift in Sources */,
 				2F1F7D7528318EEE00AA30DB /* ButtonExample.swift in Sources */,
 				2FA986792837351B000DB409 /* GridExample.swift in Sources */,
 				2FD5447A28720B810098468D /* TextFieldExample.swift in Sources */,
