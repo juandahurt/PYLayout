@@ -16,9 +16,11 @@ public struct PuraceAdjustableHStack: View {
     private let sensibility: CGFloat = 35
     
     var builder: (Int) -> (title: String, imageUrl: URL?)
+    var onElementSelected: ((Int) -> Void)?
     
-    public init(builder: @escaping (Int) -> (String, URL?)) {
+    public init(builder: @escaping (Int) -> (String, URL?), onElementSelected: ((Int) -> Void)?) {
         self.builder = builder
+        self.onElementSelected = onElementSelected
     }
     
     func next() {
@@ -58,7 +60,7 @@ public struct PuraceAdjustableHStack: View {
                     .frame(width: index == selectedIndex ? reader.size.width * 0.75 : nil)
                     .onTapGesture {
                         if index == selectedIndex {
-                            
+                            onElementSelected?(index)
                         } else {
                             withAnimation(.spring()) {
                                 selectedIndex = index
