@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct PuraceSnackbarView: View {
-    @State var yOffset: CGFloat = 100
+    @State var yOffset: CGFloat = 120
     @State var opacity: Double = 0
     
     let title: String
@@ -45,7 +45,7 @@ struct PuraceSnackbarView: View {
                 PuraceTextView(title, fontSize: 14, textColor: .white)
                 Spacer()
                 if let buttonTitle = buttonTitle {
-                    PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .clear, .white)) {
+                    PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .white.opacity(0.1), .white)) {
                         buttonOnTap?()
                         isVisible = false
                     }
@@ -53,16 +53,7 @@ struct PuraceSnackbarView: View {
             }
                 .lineLimit(2)
                 .padding()
-                .frame(width: UIScreen.main.bounds.width - 40)
                 .background(getBackgroundColor())
-                .cornerRadius(5)
-                .onChange(of: isVisible, perform: { _ in
-                    withAnimation(.spring()) {
-                        yOffset = 100
-                        opacity = 0
-                    }
-                })
-                .opacity(opacity)
                 .offset(x: 0, y: yOffset)
                 .onAppear {
                     withAnimation(.spring()) {
@@ -70,7 +61,13 @@ struct PuraceSnackbarView: View {
                         opacity = 1
                     }
                 }
-        }
+                .edgesIgnoringSafeArea(.bottom)
+        }.onChange(of: isVisible, perform: { _ in
+            withAnimation(.spring()) {
+                yOffset = 120
+                opacity = 0
+            }
+        })
     }
 }
 
