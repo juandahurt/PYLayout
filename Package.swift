@@ -15,11 +15,12 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMinor(from: "7.2.0")),
         .package(url: "https://github.com/GeorgeElsham/ViewExtractor", .exact("1.1.0")),
+        .package(url: "https://github.com/exyte/PopupView.git", from: "1.0.0")
     ],
     targets: [
         .target(
             name: "Purace",
-            dependencies: ["Kingfisher", "ViewExtractor"],
+            dependencies: ["Kingfisher", "ViewExtractor", "PopupView"],
             resources: [
                 .copy("Resources/Fonts/Poppins/Poppins-Regular.ttf"),
                 .copy("Resources/Fonts/Poppins/Poppins-Medium.ttf"),
