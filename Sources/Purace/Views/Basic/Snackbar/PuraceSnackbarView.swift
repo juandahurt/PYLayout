@@ -6,16 +6,13 @@
 //
 
 import Foundation
+import PopupView
 import SwiftUI
 
 struct PuraceSnackbarView: View {
-    @State var yOffset: CGFloat = 120
-    @State var opacity: Double = 0
-    
+    @Binding var isVisible: Bool
     let title: String
     let type: PuraceSnackbarType
-    @State var isVisibleAux: Bool = true
-    @Binding var isVisible: Bool
     let buttonTitle: String?
     let buttonOnTap: (() -> Void)?
     
@@ -39,72 +36,52 @@ struct PuraceSnackbarView: View {
     }
     
     public var body: some View {
-        VStack {
+        HStack {
+            PuraceTextView(title, textColor: .white)
             Spacer()
-            HStack {
-                PuraceTextView(title, fontSize: 14, textColor: .white)
-                Spacer()
-                if let buttonTitle = buttonTitle {
-                    PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .white.opacity(0.1), .white)) {
-                        buttonOnTap?()
-                        isVisible = false
-                    }
+            if let buttonTitle = buttonTitle {
+                PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .white.opacity(0.1), .white)) {
+                    buttonOnTap?()
+                    isVisible = false
                 }
             }
-                .lineLimit(2)
-                .padding()
-                .background(getBackgroundColor())
-                .offset(x: 0, y: yOffset)
-                .onAppear {
-                    withAnimation(.spring()) {
-                        yOffset = 0
-                        opacity = 1
-                    }
-                }
-                .edgesIgnoringSafeArea(.bottom)
-        }.onChange(of: isVisible, perform: { _ in
-            withAnimation(.spring()) {
-                yOffset = 120
-                opacity = 0
-            }
-        })
+        }
+            .lineLimit(2)
+            .padding(.vertical)
+            .padding(.horizontal, 20)
+            .background(getBackgroundColor())
     }
 }
 
 
 struct PuraceSnackbarViewModifier: ViewModifier {
     @Binding var isVisible: Bool
-    @State var isVisibleAux = false
     var title: String
     var buttonTitle: String?
     var type: PuraceSnackbarType
     var buttonOnTap: (() -> Void)?
-    var onDissappear: (() -> Void)?
+    var duration: PuraceSnackbarDuration
+    var dismissOnDrag = false
+    var closeOnTap = false
     
     func body(content: Content) -> some View {
         ZStack {
             content
-            if isVisibleAux {
-                PuraceSnackbarView(title: title, type: type, isVisible: $isVisible, buttonTitle: buttonTitle, buttonOnTap: buttonOnTap)
-                    .onDisappear {
-                        onDissappear?()
-                    }
-            }
-        }.onChange(of: isVisible) { newValue in
-            if !newValue {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                    isVisibleAux = newValue
-                }
-            } else {
-                isVisibleAux = newValue
-            }
+        }
+        .popup(isPresented: $isVisible, type: .toast, autohideIn: Double(duration.rawValue), dragToDismiss: dismissOnDrag, closeOnTap: closeOnTap) {
+            PuraceSnackbarView(title: title, type: type, isVisible: $isVisible, buttonTitle: buttonTitle, buttonOnTap: buttonOnTap)
         }
     }
 }
 
+public enum PuraceSnackbarDuration: String {
+    case short = "2.0"
+    case long = "3.5"
+    case endless = ""
+}
 
 public extension View {
-    func snackBar(title: String, isVisible: Binding<Bool>, type: PuraceSnackbarType = .info, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil, onDissappear: (() -> Void)? = nil) -> some View {
-        modifier(PuraceSnackbarViewModifier(isVisible: isVisible, title: title, buttonTitle: buttonTitle, type: type, buttonOnTap: buttonOnTap, onDissappear: onDissappear))
+    func snackBar(title: String, isVisible: Binding<Bool>, type: PuraceSnackbarType = .info, buttonTitle: String? = nil, duration: PuraceSnackbarDuration = .endless, dismissOnDrag: Bool = false, closeOnTap: Bool = false, buttonOnTap: (() -> Void)? = nil) -> some View {
+        modifier(PuraceSnackbarViewModifier(isVisible: isVisible, title: title, buttonTitle: buttonTitle, type: type, buttonOnTap: buttonOnTap, duration: duration, dismissOnDrag: dismissOnDrag, closeOnTap: closeOnTap))
     }
 }
