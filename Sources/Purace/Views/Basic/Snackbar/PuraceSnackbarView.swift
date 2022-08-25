@@ -10,10 +10,9 @@ import PopupView
 import SwiftUI
 
 struct PuraceSnackbarView: View {
+    @Binding var isVisible: Bool
     let title: String
     let type: PuraceSnackbarType
-    @State var isVisibleAux: Bool = true
-    @Binding var isVisible: Bool
     let buttonTitle: String?
     let buttonOnTap: (() -> Void)?
     
@@ -61,21 +60,28 @@ struct PuraceSnackbarViewModifier: ViewModifier {
     var buttonTitle: String?
     var type: PuraceSnackbarType
     var buttonOnTap: (() -> Void)?
-    var onDissappear: (() -> Void)?
+    var duration: PuraceSnackbarDuration
+    var dismissOnDrag = false
+    var closeOnTap = false
     
     func body(content: Content) -> some View {
         ZStack {
             content
         }
-        .popup(isPresented: $isVisible, type: .toast, animation: .spring(), closeOnTap: false) {
+        .popup(isPresented: $isVisible, type: .toast, autohideIn: Double(duration.rawValue), dragToDismiss: dismissOnDrag, closeOnTap: closeOnTap) {
             PuraceSnackbarView(title: title, type: type, isVisible: $isVisible, buttonTitle: buttonTitle, buttonOnTap: buttonOnTap)
         }
     }
 }
 
+public enum PuraceSnackbarDuration: String {
+    case short = "2.0"
+    case long = "3.5"
+    case endless = ""
+}
 
 public extension View {
-    func snackBar(title: String, isVisible: Binding<Bool>, type: PuraceSnackbarType = .info, buttonTitle: String? = nil, buttonOnTap: (() -> Void)? = nil, onDissappear: (() -> Void)? = nil) -> some View {
-        modifier(PuraceSnackbarViewModifier(isVisible: isVisible, title: title, buttonTitle: buttonTitle, type: type, buttonOnTap: buttonOnTap, onDissappear: onDissappear))
+    func snackBar(title: String, isVisible: Binding<Bool>, type: PuraceSnackbarType = .info, buttonTitle: String? = nil, duration: PuraceSnackbarDuration = .endless, dismissOnDrag: Bool = false, closeOnTap: Bool = false, buttonOnTap: (() -> Void)? = nil) -> some View {
+        modifier(PuraceSnackbarViewModifier(isVisible: isVisible, title: title, buttonTitle: buttonTitle, type: type, buttonOnTap: buttonOnTap, duration: duration, dismissOnDrag: dismissOnDrag, closeOnTap: closeOnTap))
     }
 }

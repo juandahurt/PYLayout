@@ -20,6 +20,6 @@ struct SnackBarExample: View {
                 showSnackbar = !showSnackbar
             }
             Spacer()
-        }.snackBar(title: "Parece que ha ocurrido un error", isVisible: $showSnackbar, type: .error, buttonTitle: "REINTENTAR")
+        }.snackBar(title: "Parece que ha ocurrido un error", isVisible: $showSnackbar, type: .info, buttonTitle: "REINTENTAR", duration: .long, dismissOnDrag: true)
     }
 }
