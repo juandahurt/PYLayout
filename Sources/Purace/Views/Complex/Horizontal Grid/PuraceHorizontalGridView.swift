@@ -128,7 +128,7 @@ public struct PuraceHorizontalGridView: View {
     public var body: some View {
         GeometryReader { reader in
             ScrollView(.horizontal) {
-                HStack(spacing: 5) {
+                LazyHStack(spacing: 5) {
                     ForEach(stacks.indices, id: \.self) { index in
                         PuraceHGridVerticalStack(contents: stacks[index].contents)
                             .frame(width: stacks.count == 1 ? reader.size.width : reader.size.width * 0.9)
