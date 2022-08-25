@@ -5,8 +5,8 @@
 //  Created by Juan Hurtado on 14/05/22.
 //
 
+import Kingfisher
 import UIKit
-import Foundation
 
 public struct PuraceManager {
     public static let shared = PuraceManager()
@@ -15,6 +15,9 @@ public struct PuraceManager {
     
     public func configure() {
         registerFonts()
+        
+        let cache = KingfisherManager.shared.cache
+        cache.memoryStorage.config.expiration = .expired
     }
 }
 
