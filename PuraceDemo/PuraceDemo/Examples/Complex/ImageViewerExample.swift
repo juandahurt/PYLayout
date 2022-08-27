@@ -12,6 +12,12 @@ import Purace
 struct ImageViewerExample: View {
     @State var isVisible = false
     
+    let urls: [URL?] = [
+        URL(string: "https://payan-dev-images.s3.us-east-2.amazonaws.com/santo-domingo.jpg"),
+        URL(string: "https://payan-dev-images.s3.us-east-2.amazonaws.com/santo-domingo.jpg"),
+        URL(string: "https://payan-places.s3.us-east-2.amazonaws.com/001/001.jpg")
+    ]
+    
     var body: some View {
         VStack {
             PuraceButtonView("Mostrar imagen") {
@@ -19,8 +25,9 @@ struct ImageViewerExample: View {
             }
             Spacer()
         }.imageViewer(
-            url: URL(string: "https://payan-dev-images.s3.us-east-2.amazonaws.com/santo-domingo.jpg"),
+            urls: urls,
             isVisible: $isVisible
         )
+            .navigationBarHidden(true)
     }
 }

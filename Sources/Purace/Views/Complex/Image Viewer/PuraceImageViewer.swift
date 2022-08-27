@@ -11,117 +11,83 @@ import Kingfisher
 
 public struct PuraceImageViewer: View {
     @Binding var isVisible: Bool
-    let backgroundColor: Color
-    let url: URL?
-    @State var opacity: Double = 0
-    @State var dragOffset: CGSize = .zero
-    @State var backgroundOpacity: Double = 1
-    @State var hasDraggedTheImage = false
-    @State var dragInitialTime: Date?
-    
+    let urls: [URL?]
+    @State var currentIndex: Int
     @GestureState var scale: CGFloat = 1
+    
+    private let numberOfImages: Int
     
     private let maximumImageHeight = UIScreen.main.bounds.height * 0.65
     
-    public init(url: URL?, isVisible: Binding<Bool>) {
-        let colors: [Color] = [
-            PuraceStyle.Color.X1,
-            PuraceStyle.Color.X2,
-            PuraceStyle.Color.X3,
-            PuraceStyle.Color.X4
-        ]
-        backgroundColor = colors.randomElement()!
-        self.url = url
+    public init(urls: [URL?], isVisible: Binding<Bool>, index: Int = 0) {
+        self.urls = urls
         self._isVisible = isVisible
+        self._currentIndex = .init(initialValue: index)
+        self.numberOfImages = urls.count
     }
     
-    private func differenceBeetwenInitialDragTime(and date: Date) -> Double {
-        guard let dragInitialTime = dragInitialTime else {
-            return .zero
-        }
-        return date.timeIntervalSince(dragInitialTime) * 1000
-    }
-    
-    var draggableArea: some View {
-        Color.black
-            .animation(.none)
-            .opacity(0.001)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        hasDraggedTheImage = true
-                        if scale == 1 {
-                            if dragInitialTime == nil {
-                                dragInitialTime = Date()
-                            }
-                            let translation = value.translation.height
-                            dragOffset.height = translation
-                            backgroundOpacity = 1 - abs(translation) * 0.001
-                        }
-                    }
-                    .onEnded { value in
-                        if scale == 1 {
-                            let diff = differenceBeetwenInitialDragTime(and: Date())
-                            if diff <= 150 || abs(dragOffset.height) >= UIScreen.main.bounds.height * 0.4  {
-                                hideView()
-                            } else {
-                                withAnimation {
-                                    backgroundOpacity = 1
-                                }
-                                dragOffset = .zero
-                            }
-                            dragInitialTime = nil
-                        }
-                    }
-            )
-            .simultaneousGesture(
-                MagnificationGesture()
-                    .updating($scale, body: { value, state, _ in
-                        guard value > 0.7 else { return }
-                        state = value
-                    })
-            )
-    }
-    
-    var image: some View {
-        PuraceImageView(url: url)
-            .scaledToFit()
-            .offset(x: dragOffset.width, y: dragOffset.height)
-            .animation(hasDraggedTheImage ? .easeOut(duration: 0.35) : .none)
-            .scaleEffect(scale)
-            .frame(maxHeight: maximumImageHeight)
-    }
-    
-    public var body: some View {
-        ZStack {
-            backgroundColor
-                .opacity(backgroundOpacity)
-            image
-            draggableArea
-        }
-        .edgesIgnoringSafeArea(.all)
-        .transition(.opacity.animation(.linear))
-    }
-}
-
-extension PuraceImageViewer {
-    private func hideImage() {
-        withAnimation {
-            if dragOffset.height > 0 {
-                dragOffset.height = UIScreen.main.bounds.height
-            } else {
-                dragOffset.height = -UIScreen.main.bounds.height
+    var indicator: some View {
+        HStack {
+            if numberOfImages > 1 {
+                PuraceTextView("\(currentIndex + 1)/\(numberOfImages)", fontSize: 14, textColor: .white, weight: .medium)
+                    .padding(.trailing)
             }
         }
     }
     
-    private func hideView() {
-        hideImage()
-        withAnimation {
-            backgroundOpacity = 0
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+    var backButton: some View {
+        Button {
             isVisible = false
+        } label: {
+            Image("arrow_back", bundle: Bundle.module)
         }
+        .buttonStyle(.plain)
+            .padding(.leading)
+    }
+    
+    var topBar: some View {
+        HStack {
+            backButton
+            
+            Spacer()
+            
+            indicator
+        }
+    }
+    
+    var viewer: some View {
+        VStack {
+            topBar
+            
+            Spacer()
+            
+            TabView(selection: $currentIndex) {
+                ForEach(0..<numberOfImages) { index in
+                    PuraceImageView(url: urls[index])
+                        .scaledToFit()
+                        .tag(index)
+                        .padding(.horizontal, 5)
+                        .scaleEffect(scale)
+                }
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .gesture(
+                MagnificationGesture()
+                    .updating($scale) { value, scale, _ in
+                        if value >= 0.9 {
+                            scale = value
+                        }
+                    }
+            )
+            
+            Spacer()
+        }.background(
+            PuraceStyle.Color.X1
+                .edgesIgnoringSafeArea(.all)
+        )
+    }
+    
+    public var body: some View {
+        viewer
     }
 }
