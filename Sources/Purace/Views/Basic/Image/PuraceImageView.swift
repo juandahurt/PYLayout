@@ -33,16 +33,15 @@ public struct PuraceImageView: View {
         ZStack {
             KFImage.url(url)
                 .resizable()
-//                .fade(duration: 0.2)
-//                .appendProcessor(DownsamplingImageProcessor(size: UIScreen.main.bounds.size))
-//                .scaleFactor(UIScreen.main.scale)
+                .fade(duration: 0.2)
+                .appendProcessor(DownsamplingImageProcessor(size: UIScreen.main.bounds.size))
+                .scaleFactor(UIScreen.main.scale)
                 .placeholder { _ in
-                    ProgressView()
-                        .foregroundColor(.white)
+                    skeletonColor
                 }
-//                .onSuccess { _ in
-//                    hasLoaded = true
-//                }
+                .onSuccess { _ in
+                    hasLoaded = true
+                }
             Group {
                 ForEach(overlayViews.indices) { index in
                     overlayViews[index]
