@@ -14,6 +14,8 @@ public struct PuraceImageViewer: View {
     let urls: [URL?]
     @State var currentIndex: Int
     @GestureState var scale: CGFloat = 1
+    @State var dragOffset: CGFloat = .zero
+    @State var backgroundOpacity = 1.0
     
     private let numberOfImages: Int
     
@@ -36,54 +38,86 @@ public struct PuraceImageViewer: View {
     }
     
     var backButton: some View {
-        Button {
-            isVisible = false
-        } label: {
-            Image("arrow_back", bundle: Bundle.module)
-        }
-        .buttonStyle(.plain)
-            .padding(.leading)
+        Image(systemName: "chevron.left")
+            .foregroundColor(.white)
+            .scaleEffect(1.2)
+            .padding()
+            .highPriorityGesture(
+                TapGesture()
+                    .onEnded {
+                        withAnimation {
+                            isVisible = false
+                        }
+                    }
+            )
     }
     
     var topBar: some View {
-        HStack {
-            backButton
-            
-            Spacer()
-            
-            indicator
+        VStack {
+            HStack(alignment: .center) {
+                backButton
+                
+                Spacer()
+                
+                indicator
+            }.frame(height: 50)
+                .opacity((abs(dragOffset) >= .zero && abs(dragOffset) <= 5) ? 1 : 0.0002)
         }
     }
     
     var viewer: some View {
-        VStack {
+        VStack(spacing: 0) {
             topBar
-            
-            Spacer()
             
             TabView(selection: $currentIndex) {
                 ForEach(0..<numberOfImages) { index in
                     PuraceImageView(url: urls[index])
                         .scaledToFit()
                         .tag(index)
-                        .padding(.horizontal, 5)
                         .scaleEffect(scale)
+                        .offset(y: dragOffset)
+                        .gesture(
+                            MagnificationGesture()
+                                .updating($scale) { value, scale, _ in
+                                    if value >= 0.9 {
+                                        scale = value
+                                    }
+                                }
+                        )
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .gesture(
-                MagnificationGesture()
-                    .updating($scale) { value, scale, _ in
-                        if value >= 0.9 {
-                            scale = value
+            .simultaneousGesture(
+                DragGesture()
+                    .onChanged { value in
+                        dragOffset = value.translation.height
+                        let screenHeight = UIScreen.main.bounds.height
+                        let progress = abs(dragOffset) / screenHeight / 2
+                        withAnimation {
+                            backgroundOpacity = 1 - progress
+                        }
+                    }
+                    .onEnded { _ in
+                        if abs(dragOffset) < 200 {
+                            withAnimation {
+                                dragOffset = 0
+                                backgroundOpacity = 1
+                            }
+                        } else {
+                            withAnimation {
+                                isVisible = false
+                            }
                         }
                     }
             )
-            
-            Spacer()
+                .onChange(of: currentIndex) { _ in
+                    dragOffset = .zero
+                }
+                
         }.background(
             PuraceStyle.Color.X1
                 .edgesIgnoringSafeArea(.all)
+                .opacity(backgroundOpacity)
         )
     }
     

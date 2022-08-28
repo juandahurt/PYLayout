@@ -18,13 +18,11 @@ public struct PuraceImageViewerModifier: ViewModifier {
     }
     
     public func body(content: Content) -> some View {
-        if isVisible {
-            ZStack {
-                content
+        ZStack {
+            content
+            if isVisible {
                 PuraceImageViewer(urls: urls, isVisible: $isVisible)
             }
-        } else {
-            content
         }
     }
 }
