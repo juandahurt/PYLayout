@@ -26,7 +26,8 @@ struct ImageViewerExample: View {
             Spacer()
         }.imageViewer(
             urls: urls,
-            isVisible: $isVisible
+            isVisible: $isVisible,
+            selectedIndex: 1
         )
             .navigationBarHidden(true)
     }

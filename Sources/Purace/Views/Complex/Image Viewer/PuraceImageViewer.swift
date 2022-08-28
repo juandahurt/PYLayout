@@ -60,7 +60,7 @@ public struct PuraceImageViewer: View {
                 Spacer()
                 
                 indicator
-            }.frame(height: 50)
+            }.frame(height: 60)
                 .opacity((abs(dragOffset) >= .zero && abs(dragOffset) <= 5) ? 1 : 0.0002)
         }
     }
