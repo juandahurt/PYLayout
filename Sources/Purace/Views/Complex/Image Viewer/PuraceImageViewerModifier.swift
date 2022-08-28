@@ -9,26 +9,28 @@ import Foundation
 import SwiftUI
 
 public struct PuraceImageViewerModifier: ViewModifier {
-    let url: URL?
+    let urls: [URL?]
     @Binding var isVisible: Bool
+    let selectedIndex: Int
     
-    public init(url: URL?, isVisible: Binding<Bool>) {
-        self.url = url
+    public init(urls: [URL?], isVisible: Binding<Bool>, selectedIndex: Int) {
+        self.urls = urls
         self._isVisible = isVisible
+        self.selectedIndex = selectedIndex
     }
     
     public func body(content: Content) -> some View {
         ZStack {
             content
             if isVisible {
-                PuraceImageViewer(url: url, isVisible: $isVisible)
+                PuraceImageViewer(urls: urls, isVisible: $isVisible, index: selectedIndex)
             }
         }
     }
 }
 
 public extension View {
-    func imageViewer(url: URL?, isVisible: Binding<Bool>) -> some View {
-        modifier(PuraceImageViewerModifier(url: url, isVisible: isVisible))
+    func imageViewer(urls: [URL?], isVisible: Binding<Bool>, selectedIndex: Int = 0) -> some View {
+        modifier(PuraceImageViewerModifier(urls: urls, isVisible: isVisible, selectedIndex: selectedIndex))
     }
 }
