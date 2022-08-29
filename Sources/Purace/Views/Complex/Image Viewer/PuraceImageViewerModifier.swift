@@ -20,12 +20,14 @@ public struct PuraceImageViewerModifier: ViewModifier {
     }
     
     public func body(content: Content) -> some View {
-        ZStack {
-            content
-            if isVisible {
-                PuraceImageViewer(urls: urls, isVisible: $isVisible, index: selectedIndex)
-            }
-        }
+        content
+            .overlay(
+                Group {
+                    if isVisible {
+                        PuraceImageViewer(urls: urls, isVisible: $isVisible, index: selectedIndex)
+                    }
+                }
+            )
     }
 }
 
