@@ -91,12 +91,14 @@ public struct PuraceImageViewer: View {
                 DragGesture()
                     .onChanged { value in
                         dragOffset = value.translation.height
-                        let screenHeight = UIScreen.main.bounds.height
-                        let progress = abs(dragOffset) / screenHeight / 2
-                        withAnimation {
-                            backgroundOpacity = 1 - progress
+                        if abs(dragOffset) > 5 {
+                            let screenHeight = UIScreen.main.bounds.height
+                            let progress = abs(dragOffset) / screenHeight / 2
+                            withAnimation {
+                                backgroundOpacity = 1 - progress
+                                userHasDropped = false
+                            }
                         }
-                        userHasDropped = false
                     }
                     .onEnded { _ in
                         if abs(dragOffset) < 200 {
