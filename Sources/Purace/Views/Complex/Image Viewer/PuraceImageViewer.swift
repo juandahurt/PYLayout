@@ -16,7 +16,7 @@ public struct PuraceImageViewer: View {
     @GestureState var scale: CGFloat = 1
     @State var dragOffset: CGFloat = .zero
     @State var backgroundOpacity = 1.0
-    
+    @State var userHasDropped = true
     private let numberOfImages: Int
     
     private let maximumImageHeight = UIScreen.main.bounds.height * 0.65
@@ -61,7 +61,7 @@ public struct PuraceImageViewer: View {
                 
                 indicator
             }.frame(height: 60)
-                .opacity((abs(dragOffset) >= .zero && abs(dragOffset) <= 5) ? 1 : 0.0002)
+                .opacity((abs(dragOffset) >= .zero && abs(dragOffset) <= 5 && userHasDropped) ? 1 : 0.0002)
         }
     }
     
@@ -91,10 +91,13 @@ public struct PuraceImageViewer: View {
                 DragGesture()
                     .onChanged { value in
                         dragOffset = value.translation.height
-                        let screenHeight = UIScreen.main.bounds.height
-                        let progress = abs(dragOffset) / screenHeight / 2
-                        withAnimation {
-                            backgroundOpacity = 1 - progress
+                        if abs(dragOffset) > 5 {
+                            let screenHeight = UIScreen.main.bounds.height
+                            let progress = abs(dragOffset) / screenHeight / 2
+                            withAnimation {
+                                backgroundOpacity = 1 - progress
+                                userHasDropped = false
+                            }
                         }
                     }
                     .onEnded { _ in
@@ -102,6 +105,7 @@ public struct PuraceImageViewer: View {
                             withAnimation {
                                 dragOffset = 0
                                 backgroundOpacity = 1
+                                userHasDropped = true
                             }
                         } else {
                             withAnimation {

@@ -20,8 +20,12 @@ struct ImageViewerExample: View {
     
     var body: some View {
         VStack {
-            PuraceButtonView("Mostrar imagen") {
-                isVisible.toggle()
+            HStack {
+                Spacer()
+                PuraceButtonView("Mostrar imagen") {
+                    isVisible.toggle()
+                }
+                Spacer()
             }
             Spacer()
         }.imageViewer(
