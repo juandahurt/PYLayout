@@ -21,7 +21,7 @@ public struct PuraceTabView<T: View>: View {
     
     func headers(in size: CGSize) -> some View {
         HStack(spacing: 0) {
-            ForEach(0..<titles.count) { index in
+            ForEach(0..<titles.count, id: \.self) { index in
                 PuraceTextView(titles[index], fontSize: 12, textColor: selectedIndex == index ? PuraceStyle.Color.N1 : PuraceStyle.Color.N4, weight: selectedIndex == index ? .medium : .regular)
                     .frame(width: size.width / CGFloat(titles.count))
                     .background(Color.gray.opacity(0.001))
@@ -58,7 +58,7 @@ public struct PuraceTabView<T: View>: View {
                 headers(in: reader.size)
                 indicator(in: reader.size)
                 ZStack {
-                    ForEach(0..<titles.count) { index in
+                    ForEach(0..<titles.count, id: \.self) { index in
                         viewForIndex(index)
                             .opacity(index == selectedIndex ? 1 : 0)
                     }
