@@ -19,7 +19,7 @@ public struct PuraceStoryView: View {
     
     var indicators: some View {
         HStack(spacing: 3) {
-            ForEach(stories.indices) { index in
+            ForEach(stories.indices, id: \.self) { index in
                 Color.white.opacity(index <= currentIndex ? 0.8 : 0.3)
                     .cornerRadius(1)
             }

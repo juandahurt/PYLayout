@@ -70,7 +70,7 @@ public struct PuraceImageViewer: View {
             topBar
             
             TabView(selection: $currentIndex) {
-                ForEach(0..<numberOfImages) { index in
+                ForEach(0..<numberOfImages, id: \.self) { index in
                     PuraceImageView(url: urls[index])
                         .scaledToFit()
                         .tag(index)

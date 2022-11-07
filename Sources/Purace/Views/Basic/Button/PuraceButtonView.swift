@@ -9,9 +9,6 @@ import Foundation
 import SwiftUI
 
 public struct PuraceButtonView: View {
-    @State var backgroundColor: Color = .blue
-    @State var isBeingPressed = false
-    
     let title: String
     let fontSize: Int
     let type: PuraceButtonType
@@ -39,9 +36,11 @@ struct PuraceButtonStyle: ButtonStyle {
     private func getBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return PuraceStyle.Color.G2
+            return PuraceStyle.Color.B2
         case .quiet:
-            return .black.opacity(0.05)
+            return PuraceStyle.Color.B5
+        case .transparent:
+            return .white.opacity(0.01)
         case .custom(let backgroundColor, _, _):
             return backgroundColor
         }
@@ -52,7 +51,9 @@ struct PuraceButtonStyle: ButtonStyle {
         case .loud:
             return .white
         case .quiet:
-            return PuraceStyle.Color.G1
+            return PuraceStyle.Color.B1
+        case .transparent:
+            return PuraceStyle.Color.B1
         case .custom(_, _, let textColor):
             return textColor
         }
@@ -61,9 +62,11 @@ struct PuraceButtonStyle: ButtonStyle {
     private func getOnPressedBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return PuraceStyle.Color.G1
+            return PuraceStyle.Color.B1
         case .quiet:
-            return .black.opacity(0.15)
+            return PuraceStyle.Color.B4
+        case .transparent:
+            return PuraceStyle.Color.B5
         case .custom(_, let onPressedColor, _):
             return onPressedColor
         }
