@@ -10,16 +10,14 @@ import SwiftUI
 import Purace
 
 struct SnackBarExample: View {
-    @State var showSnackbar = false
-    
     var body: some View {
         VStack {
             Text("`PuraceSnackbarView(title: ...)`")
                 .padding()
-            PuraceButtonView(!showSnackbar ? "Mostrar snackbar" : "Ocultar snackbar", fontSize: 14) {
-                showSnackbar = !showSnackbar
+            PuraceButtonView("Mostrar snackbar", fontSize: 14) {
+                PuraceSnackbarManager.instance.show(withTitle: "Test", type: .info)
             }
             Spacer()
-        }.snackBar(title: "Parece que ha ocurrido un error", isVisible: $showSnackbar, type: .info, buttonTitle: "REINTENTAR", duration: .long, dismissOnDrag: true)
+        }
     }
 }
