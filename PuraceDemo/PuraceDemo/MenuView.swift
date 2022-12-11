@@ -38,6 +38,9 @@ struct MenuView: View {
                     NavigationLink("Text Field") {
                         TextFieldExample()
                     }
+                    NavigationLink("Search box") {
+                        SearchExample()
+                    }
                 }
                 Section(header: Text("Complex")) {
                     NavigationLink("Collection card") {

@@ -18,6 +18,7 @@
 		2F6267AE2857B6960063A630 /* AccordionExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6267AD2857B6960063A630 /* AccordionExample.swift */; };
 		2F77A234283C4AC700F143FB /* ImageExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F77A233283C4AC700F143FB /* ImageExample.swift */; };
 		2F7EC3C72867656200D5DDC6 /* ImageViewerExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7EC3C62867656200D5DDC6 /* ImageViewerExample.swift */; };
+		2F8272CF2946831300783DE6 /* SearchExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8272CE2946831300783DE6 /* SearchExample.swift */; };
 		2F9321B3282EE49E003DA929 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9321B2282EE49E003DA929 /* AppDelegate.swift */; };
 		2F9321B5282EE49E003DA929 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9321B4282EE49E003DA929 /* SceneDelegate.swift */; };
 		2F9321B7282EE49E003DA929 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9321B6282EE49E003DA929 /* MenuView.swift */; };
@@ -43,6 +44,7 @@
 		2F6267AD2857B6960063A630 /* AccordionExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccordionExample.swift; sourceTree = "<group>"; };
 		2F77A233283C4AC700F143FB /* ImageExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExample.swift; sourceTree = "<group>"; };
 		2F7EC3C62867656200D5DDC6 /* ImageViewerExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerExample.swift; sourceTree = "<group>"; };
+		2F8272CE2946831300783DE6 /* SearchExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchExample.swift; sourceTree = "<group>"; };
 		2F9321AF282EE49E003DA929 /* PuraceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuraceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9321B2282EE49E003DA929 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F9321B4282EE49E003DA929 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				2F6267AD2857B6960063A630 /* AccordionExample.swift */,
 				2F569938285FB93500F2D4D3 /* ModalExample.swift */,
 				2FD5447928720B810098468D /* TextFieldExample.swift */,
+				2F8272CE2946831300783DE6 /* SearchExample.swift */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				2FC004092831AC250037EF10 /* StoryExample.swift in Sources */,
 				2F1F7D7128317E0700AA30DB /* CollectionCardExample.swift in Sources */,
 				2F1F7D7328318D9900AA30DB /* TextExample.swift in Sources */,
+				2F8272CF2946831300783DE6 /* SearchExample.swift in Sources */,
 				2F9321B7282EE49E003DA929 /* MenuView.swift in Sources */,
 				2F7EC3C72867656200D5DDC6 /* ImageViewerExample.swift in Sources */,
 				2F9321B3282EE49E003DA929 /* AppDelegate.swift in Sources */,
