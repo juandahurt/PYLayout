@@ -34,7 +34,9 @@ public class PuraceSnackbarManager {
         window.addSubview(snackbar!)
         
         // Height constriant
-        snackbar?.heightAnchor.constraint(equalToConstant: PuraceSnackbar.height).isActive = true
+        let heightConstraint = snackbar?.heightAnchor.constraint(equalToConstant: PuraceSnackbar.height)
+        heightConstraint?.priority = .defaultLow
+        heightConstraint?.isActive = true
         
         // Bottom constriant
         snackbar?.topAnchor.constraint(equalTo: window.safeAreaLayoutGuide.bottomAnchor, constant: bottomPadding).isActive = true

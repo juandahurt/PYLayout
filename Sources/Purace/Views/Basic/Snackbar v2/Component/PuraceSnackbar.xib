@@ -19,24 +19,32 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="134"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd3-Fo-KXQ">
-                    <rect key="frame" x="20" y="56.666666666666657" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nek-Ra-1ia">
-                    <rect key="frame" x="319" y="50" width="54" height="34"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button"/>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KDH-Pp-IBp">
+                    <rect key="frame" x="16" y="10" width="361" height="114"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd3-Fo-KXQ">
+                            <rect key="frame" x="0.0" y="0.0" width="287" height="114"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nek-Ra-1ia">
+                            <rect key="frame" x="307" y="0.0" width="54" height="114"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="8po-gU-5S4"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Vd3-Fo-KXQ" firstAttribute="centerY" secondItem="fTQ-8B-eqd" secondAttribute="centerY" id="Icc-dL-4eH"/>
-                <constraint firstAttribute="trailing" secondItem="nek-Ra-1ia" secondAttribute="trailing" constant="20" id="W4V-zZ-bMS"/>
-                <constraint firstItem="nek-Ra-1ia" firstAttribute="centerY" secondItem="fTQ-8B-eqd" secondAttribute="centerY" id="YO9-ZV-LCy"/>
-                <constraint firstItem="Vd3-Fo-KXQ" firstAttribute="leading" secondItem="fTQ-8B-eqd" secondAttribute="leading" constant="20" id="iaC-gl-QId"/>
+                <constraint firstAttribute="bottom" secondItem="KDH-Pp-IBp" secondAttribute="bottom" constant="10" id="KTd-2R-oPA"/>
+                <constraint firstItem="KDH-Pp-IBp" firstAttribute="top" secondItem="fTQ-8B-eqd" secondAttribute="top" constant="10" id="VWq-WI-MU4"/>
+                <constraint firstItem="KDH-Pp-IBp" firstAttribute="leading" secondItem="fTQ-8B-eqd" secondAttribute="leading" constant="16" id="bpp-hc-zHa"/>
+                <constraint firstAttribute="trailing" secondItem="KDH-Pp-IBp" secondAttribute="trailing" constant="16" id="fHb-YZ-v7m"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
