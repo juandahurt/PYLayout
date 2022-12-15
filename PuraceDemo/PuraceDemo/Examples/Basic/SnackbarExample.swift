@@ -10,16 +10,51 @@ import SwiftUI
 import Purace
 
 struct SnackBarExample: View {
-    @State var showSnackbar = false
+    @State var showActionButton = false
+    private let types = ["info", "error", "alert"]
+    @State var selectedType = "info"
+    
+    func getType() -> PuraceSnackbarType {
+        switch selectedType {
+        case "info":
+            return .info
+        case "error":
+            return .error
+        case "alert":
+            return .alert
+        default: return .error
+        }
+    }
     
     var body: some View {
         VStack {
-            Text("`PuraceSnackbarView(title: ...)`")
-                .padding()
-            PuraceButtonView(!showSnackbar ? "Mostrar snackbar" : "Ocultar snackbar", fontSize: 14) {
-                showSnackbar = !showSnackbar
+            HStack {
+                Toggle(isOn: $showActionButton) {
+                    PuraceTextView("Mostrar el botón de acción")
+                }
+            }
+            
+            HStack {
+                PuraceTextView("Tipo")
+                Picker("", selection: $selectedType) {
+                    ForEach(types, id: \.self) {
+                        Text($0)
+                    }
+                }
+                Spacer()
+            }
+            
+            PuraceButtonView("Mostrar snackbar", fontSize: 14) {
+                PuraceSnackbarBuilder()
+                    .withTitle("Hubo un error")
+                    .withType(getType())
+                    .withAction(title: showActionButton ? "REINTENTAR" : nil, handler: {
+                        print("Action button tapped")
+                    })
+                    .build()
+                    .show()
             }
             Spacer()
-        }.snackBar(title: "Parece que ha ocurrido un error", isVisible: $showSnackbar, type: .info, buttonTitle: "REINTENTAR", duration: .long, dismissOnDrag: true)
+        }.padding(.horizontal)
     }
 }
