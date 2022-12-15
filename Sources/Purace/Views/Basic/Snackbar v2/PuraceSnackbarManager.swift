@@ -80,7 +80,7 @@ class PuraceSnackbarManager {
             guard let self else { return }
             self.snackbar?.transform = .init(translationX: 0, y: -PuraceSnackbar.height - PuraceSnackbar.padding)
         }) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .seconds(content.duration.rawValue))) { [weak self] in
                 guard let self else { return }
                 if self.isPresented {
                     self.hide()

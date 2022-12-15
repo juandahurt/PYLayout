@@ -35,6 +35,11 @@ public class PuraceSnackbarBuilder {
         return self
     }
     
+    public func whithDuraction(_ duration: PuraceSnakbarDuration) -> PuraceSnackbarBuilder {
+        content.duration = duration
+        return self
+    }
+    
     public func withAction(title: String?, handler: @escaping () -> Void) -> PuraceSnackbarBuilder {
         content.actionTitle = title
         content.action = handler

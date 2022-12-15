@@ -10,6 +10,7 @@ import Foundation
 public struct PuraceSnackbarContent {
     var title: String = ""
     var type: PuraceSnackbarType = .info
+    var duration: PuraceSnakbarDuration = .low
     var action: (() -> Void)?
     var actionTitle: String?
 }
