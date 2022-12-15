@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class PuraceSnackbarManager {
+class PuraceSnackbarManager {
     private static var _instance: PuraceSnackbarManager? = nil
     public static var instance: PuraceSnackbarManager {
         if _instance == nil {
@@ -25,12 +25,18 @@ public class PuraceSnackbarManager {
     
     private init() {}
     
-    private func setupSnackbarView(withTitle title: String, type: PuraceSnackbarType) {
+    private func setupSnackbarView(using content: PuraceSnackbarContent) {
         guard let window = UIApplication.shared.keyWindow else { return }
+        var topController = window.rootViewController
+        while let presentedViewController = topController?.presentedViewController {
+            topController = presentedViewController
+        }
         let bottomPadding = window.safeAreaInsets.bottom
         
         snackbar = PuraceSnackbar(frame: .init(x: 0, y: 0, width: 100, height: 0))
-        snackbar?.setup(with: title, type: type)
+        snackbar?.setTitle(content.title)
+        snackbar?.setType(content.type)
+        snackbar?.setAction(withTitle: content.actionTitle, content.action)
         window.addSubview(snackbar!)
         
         // Height constriant
@@ -51,16 +57,16 @@ public class PuraceSnackbarManager {
     /// When called this function, some verbose logs will be printed on the console.
     ///
     /// Call this function **only** for debug purpuses.
-    public func debug() -> PuraceSnackbarManager {
+    func debug() -> PuraceSnackbarManager {
         verbose = true
         return self
     }
     
-    public func show(withTitle title: String, type: PuraceSnackbarType) {
+    func show(using content: PuraceSnackbarContent) {
         if isPresented {
             enqueue(label: "show") { [weak self] in
                 guard let self else { return }
-                self.show(withTitle: title, type: type)
+                self.show(using: content)
             }
             return
         }
@@ -69,7 +75,7 @@ public class PuraceSnackbarManager {
             print("showing snackbar")
         }
         
-        setupSnackbarView(withTitle: title, type: type)
+        setupSnackbarView(using: content)
         UIView.animate(withDuration: 0.4, delay: 0, animations: { [weak self] in
             guard let self else { return }
             self.snackbar?.transform = .init(translationX: 0, y: -PuraceSnackbar.height - PuraceSnackbar.padding)
@@ -82,10 +88,9 @@ public class PuraceSnackbarManager {
             }
         }
         isPresented = true
-        
     }
     
-    public func hide() {
+    func hide() {
         if verbose {
             print("hiding snackbar")
         }
