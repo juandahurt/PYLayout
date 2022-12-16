@@ -65,6 +65,11 @@ struct MenuView: View {
                         AdjustableHStackExample()
                     }
                 }
+                Section {
+                    NavigationLink("Scaffold") {
+                        ScaffoldExample()
+                    }
+                }
             }
             .navigationTitle("Purace")
         }

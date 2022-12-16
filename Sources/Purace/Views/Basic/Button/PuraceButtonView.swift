@@ -10,14 +10,14 @@ import SwiftUI
 
 public struct PuraceButtonView: View {
     let title: String
-    let fontSize: Int
     let type: PuraceButtonType
+    let size: PuraceButtonSize
     let onTap: (() -> Void)?
     
-    public init(_ title: String, fontSize: Int = 12, type: PuraceButtonType = .loud, onTap: (() -> Void)? = nil) {
+    public init(_ title: String, size: PuraceButtonSize = .medium, type: PuraceButtonType = .loud, onTap: (() -> Void)? = nil) {
         self.title = title
-        self.fontSize = fontSize
         self.type = type
+        self.size = size
         self.onTap = onTap
     }
     
@@ -25,7 +25,7 @@ public struct PuraceButtonView: View {
         Button(title) {
             onTap?()
         }
-        .font(PuraceStyle.Font.get(size: CGFloat(fontSize), weight: .medium))
+        .font(PuraceStyle.Font.get(size: CGFloat(size.rawValue), weight: .medium))
         .buttonStyle(PuraceButtonStyle(type: type))
     }
 }
@@ -36,13 +36,9 @@ struct PuraceButtonStyle: ButtonStyle {
     private func getBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return PuraceStyle.Color.B2
+            return PuraceStyle.Color.N2
         case .quiet:
-            return PuraceStyle.Color.B5
-        case .transparent:
-            return .white.opacity(0.01)
-        case .custom(let backgroundColor, _, _):
-            return backgroundColor
+            return .clear
         }
     }
     
@@ -51,33 +47,30 @@ struct PuraceButtonStyle: ButtonStyle {
         case .loud:
             return .white
         case .quiet:
-            return PuraceStyle.Color.B1
-        case .transparent:
-            return PuraceStyle.Color.B1
-        case .custom(_, _, let textColor):
-            return textColor
+            return PuraceStyle.Color.N1
         }
     }
     
     private func getOnPressedBackgroundColor() -> Color {
         switch type {
         case .loud:
-            return PuraceStyle.Color.B1
+            return PuraceStyle.Color.N1
         case .quiet:
-            return PuraceStyle.Color.B4
-        case .transparent:
-            return PuraceStyle.Color.B5
-        case .custom(_, let onPressedColor, _):
-            return onPressedColor
+            return PuraceStyle.Color.N8
         }
     }
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 4)
             .background(configuration.isPressed ? getOnPressedBackgroundColor() : getBackgroundColor())
             .foregroundColor(getTextColor())
-            .clipShape(RoundedRectangle(cornerRadius: 5))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(
+                RoundedRectangle(cornerRadius:20)
+                    .stroke(lineWidth: 1)
+                    .foregroundColor(PuraceStyle.Color.N2)
+            )
     }
 }

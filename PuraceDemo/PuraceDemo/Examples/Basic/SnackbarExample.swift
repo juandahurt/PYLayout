@@ -44,7 +44,7 @@ struct SnackBarExample: View {
                 Spacer()
             }
             
-            PuraceButtonView("Mostrar snackbar", fontSize: 14) {
+            PuraceButtonView("Mostrar snackbar") {
                 PuraceSnackbarBuilder()
                     .withTitle("Hubo un error")
                     .withType(getType())
