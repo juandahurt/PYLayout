@@ -40,10 +40,11 @@ struct PuraceSnackbarView: View {
             PuraceTextView(title, textColor: .white)
             Spacer()
             if let buttonTitle = buttonTitle {
-                PuraceButtonView(buttonTitle, fontSize: 14, type: .custom(.clear, .white.opacity(0.1), .white)) {
-                    buttonOnTap?()
-                    isVisible = false
-                }
+                PuraceTextView(buttonTitle, textColor: .white, weight: .medium)
+                    .onTapGesture {
+                        buttonOnTap?()
+                        isVisible = false
+                    }
             }
         }
             .lineLimit(2)
