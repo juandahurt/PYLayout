@@ -12,28 +12,34 @@ struct PuraceErrorView: View {
     
     var body: some View {
         GeometryReader { _ in
-            VStack(alignment: .center) {
+            HStack {
                 Spacer(minLength: 0)
-                Image("error", bundle: .module)
-                VStack(spacing: 17) {
-                    PuraceTextView("Ups", fontSize: 22, weight: .medium)
-                    PuraceTextView("Parece que ha ocurrido un error. No te preocupes, es nuestra culpa.", fontSize: 14, textColor: PuraceStyle.Color.N2)
-                        .multilineTextAlignment(.center)
-                    HStack(spacing: 3) {
-                        PuraceTextView("Código:", textColor: PuraceStyle.Color.N4)
-                        PuraceTextView("12", weight: .medium)
+                
+                VStack(alignment: .center) {
+                    Spacer(minLength: 0)
+                    Image("error", bundle: .module)
+                    VStack(alignment: .center, spacing: 17) {
+                        PuraceTextView("Ups", fontSize: 22, weight: .medium)
+                        PuraceTextView("Parece que ha ocurrido un error. No te preocupes, es nuestra culpa.", fontSize: 14, textColor: PuraceStyle.Color.N2)
+                            .multilineTextAlignment(.center)
+                        HStack(spacing: 3) {
+                            PuraceTextView("Código:", textColor: PuraceStyle.Color.N4)
+                            PuraceTextView("12", weight: .medium)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 4)
+                        .background(Color.white)
+                        .cornerRadius(20)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 4)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                }
-                Spacer(minLength: 0)
-                if let onRetryTap {
-                    PuraceButtonView("Reintentar") {
-                        onRetryTap()
+                    Spacer(minLength: 0)
+                    if let onRetryTap {
+                        PuraceButtonView("Reintentar") {
+                            onRetryTap()
+                        }
                     }
+                    Spacer(minLength: 0)
                 }
+                
                 Spacer(minLength: 0)
             }
             .padding(.horizontal, 50)

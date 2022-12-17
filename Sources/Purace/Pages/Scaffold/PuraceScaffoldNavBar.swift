@@ -10,10 +10,12 @@ import SwiftUI
 
 public struct PuraceScaffoldNavBar: View {
     var title: String
+    var showBackButton: Bool
     var backOnTap: () -> Void
     
-    public init(title: String, backOnTap: @escaping () -> Void) {
+    public init(title: String, showBackButton: Bool = true, backOnTap: @escaping () -> Void) {
         self.title = title
+        self.showBackButton = showBackButton
         self.backOnTap = backOnTap
     }
     
@@ -22,17 +24,19 @@ public struct PuraceScaffoldNavBar: View {
             VStack(alignment: .center) {
                 Spacer(minLength: 0)
                 HStack(alignment: .center) {
-                    Button {
-                        backOnTap()
-                    } label: {
-                        Image("arrow_left", bundle: .module)
-                            .foregroundColor(PuraceStyle.Color.N1)
-                    }.frame(width: 20)
-                        .buttonStyle(.plain)
+                    if showBackButton {
+                        Button {
+                            backOnTap()
+                        } label: {
+                            Image("arrow_left", bundle: .module)
+                                .foregroundColor(PuraceStyle.Color.N1)
+                        }.frame(width: 20)
+                            .buttonStyle(.plain)
+                    }
                     
                     Spacer(minLength: 0)
                     
-                    PuraceTextView(title, fontSize: 14, weight: .medium)
+                    PuraceTextView(title, fontSize: 16, weight: .medium)
                         .multilineTextAlignment(.center)
                     
                     Spacer(minLength: 0)
