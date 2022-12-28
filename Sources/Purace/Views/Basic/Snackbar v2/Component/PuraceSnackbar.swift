@@ -27,7 +27,7 @@ class PuraceSnackbar: UIView, NibLoadable {
     }
     
     private func setupSubviews() {
-        titleLabel.font = UIFont(name: "Poppins-Regular", size: 14)
+        titleLabel.font = UIFont(name: "Poppins-Regular", size: 12)
         titleLabel.textColor = .white
         
         actionButton.titleLabel?.textColor = .white
