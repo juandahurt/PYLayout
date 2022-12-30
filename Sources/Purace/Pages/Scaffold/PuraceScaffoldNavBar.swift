@@ -41,15 +41,14 @@ public struct PuraceScaffoldNavBar: View {
                     
                     Spacer(minLength: 0)
                     
-                    Color.white
+                    PuraceStyle.Color.F1
                         .frame(width: 20, height: 20)
-                        .background(Color.white)
                 }
                 Spacer(minLength: 0)
             }
         }
         .frame(height: 50)
         .padding(.horizontal, 16)
-        .background(Color.white)
+        .background(PuraceStyle.Color.F1)
     }
 }
